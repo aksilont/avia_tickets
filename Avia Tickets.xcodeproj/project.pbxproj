@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7A4D862F25A06B3900E7C5EB /* PlaceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A4D862E25A06B3900E7C5EB /* PlaceViewController.m */; };
+		7A4D863225A1B76D00E7C5EB /* SearchRequest.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A4D863125A1B76D00E7C5EB /* SearchRequest.h */; };
 		7AA5FD8F2598AA3000C5A6A4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AA5FD8E2598AA3000C5A6A4 /* AppDelegate.m */; };
 		7AA5FD922598AA3000C5A6A4 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AA5FD912598AA3000C5A6A4 /* SceneDelegate.m */; };
 		7AA5FD952598AA3000C5A6A4 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AA5FD942598AA3000C5A6A4 /* MainViewController.m */; };
@@ -23,6 +25,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7A4D862D25A06B3900E7C5EB /* PlaceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlaceViewController.h; sourceTree = "<group>"; };
+		7A4D862E25A06B3900E7C5EB /* PlaceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlaceViewController.m; sourceTree = "<group>"; };
+		7A4D863125A1B76D00E7C5EB /* SearchRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchRequest.h; sourceTree = "<group>"; };
 		7AA5FD8A2598AA3000C5A6A4 /* Avia Tickets.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Avia Tickets.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AA5FD8D2598AA3000C5A6A4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7AA5FD8E2598AA3000C5A6A4 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -114,6 +119,8 @@
 			children = (
 				7AA5FD932598AA3000C5A6A4 /* MainViewController.h */,
 				7AA5FD942598AA3000C5A6A4 /* MainViewController.m */,
+				7A4D862D25A06B3900E7C5EB /* PlaceViewController.h */,
+				7A4D862E25A06B3900E7C5EB /* PlaceViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -137,6 +144,7 @@
 				7ADD26612598AF4B00051972 /* City.m */,
 				7ADD26642598AF5400051972 /* Country.h */,
 				7ADD26652598AF5400051972 /* Country.m */,
+				7A4D863125A1B76D00E7C5EB /* SearchRequest.h */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -221,12 +229,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A4D862F25A06B3900E7C5EB /* PlaceViewController.m in Sources */,
 				7ADD26662598AF5400051972 /* Country.m in Sources */,
 				7AA5FD952598AA3000C5A6A4 /* MainViewController.m in Sources */,
 				7ADD265E2598AF3B00051972 /* Airport.m in Sources */,
 				7ADD26622598AF4B00051972 /* City.m in Sources */,
 				7AA5FD8F2598AA3000C5A6A4 /* AppDelegate.m in Sources */,
 				7ADD266B2598B71800051972 /* DataManager.m in Sources */,
+				7A4D863225A1B76D00E7C5EB /* SearchRequest.h in Sources */,
 				7AA5FDA02598AA3000C5A6A4 /* main.m in Sources */,
 				7AA5FD922598AA3000C5A6A4 /* SceneDelegate.m in Sources */,
 			);
