@@ -7,8 +7,11 @@
 
 #import "MainViewController.h"
 #import "PlaceViewController.h"
+#import "TicketsTableViewController.h"
+
 #import "DataManager.h"
 #import "APIManager.h"
+
 #import "SearchRequest.h"
 
 @interface MainViewController () <PlaceViewControllerDelegate>
@@ -63,7 +66,7 @@
     self.arrivalButton = arrival;
     
     UIButton *search = [UIButton buttonWithType:UIButtonTypeSystem];
-//    [search addTarget:self action:@selector(didTapPlaceButton:) forControlEvents:UIControlEventTouchUpInside];
+    [search addTarget:self action:@selector(didTapSearchButton:) forControlEvents:UIControlEventTouchUpInside];
     [search setTitle:@"Search" forState:UIControlStateNormal];
     search.titleLabel.font = [UIFont systemFontOfSize:20.0 weight:UIFontWeightBold];
     search.tintColor = [UIColor whiteColor];
@@ -102,6 +105,19 @@
     }
     vc.delegate = self;
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)didTapSearchButton:(UIButton *)sender {
+    [[APIManager sharedInstance] ticketsWithRequest:self.searchRequest withCompletion:^(NSArray * _Nonnull tickets) {
+        if (tickets.count > 0) {
+            TicketsTableViewController *vc = [[TicketsTableViewController alloc] initWithTickets:tickets];
+            [self.navigationController showViewController:vc sender:sender];
+        } else {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Oops!" message:@"No tickets found" preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:nil]];
+            [self presentViewController:alert animated:YES completion:nil];
+        }
+    }];
 }
 
 - (void)setPlace:(id)place withType:(PlaceType)placeType andDataType:(DataSourceType)dataType forButton:(UIButton *)button {

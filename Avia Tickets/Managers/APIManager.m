@@ -10,7 +10,7 @@
 #import "Ticket.h"
 #import "City.h"
 
-#define API_TOKEN @"​2bc7f38716a185bc1800ad76e4a4c81c"
+#define API_TOKEN @"2bc7f38716a185bc1800ad76e4a4c81c"
 #define API_URL_IP_ADDRESS @"https://api.ipify.org/?format=json"
 #define API_URL_CITY_FROM_IP @"https://www.travelpayouts.com/whereami?ip="
 #define API_URL_CHEAP @"https://api.travelpayouts.com/v1/prices/cheap"

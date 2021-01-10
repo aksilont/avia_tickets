@@ -10,6 +10,7 @@
 		7A10B09025A5C4B7008B6142 /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A10B08F25A5C4B7008B6142 /* APIManager.m */; };
 		7A3DA97925AB5C180011DA97 /* Ticket.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3DA97825AB5C180011DA97 /* Ticket.m */; };
 		7A3DA97E25AB709E0011DA97 /* TicketTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3DA97D25AB709E0011DA97 /* TicketTableViewCell.m */; };
+		7A3DA98725AB7D810011DA97 /* TicketsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3DA98625AB7D810011DA97 /* TicketsTableViewController.m */; };
 		7A4D862F25A06B3900E7C5EB /* PlaceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A4D862E25A06B3900E7C5EB /* PlaceViewController.m */; };
 		7A4D863225A1B76D00E7C5EB /* SearchRequest.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A4D863125A1B76D00E7C5EB /* SearchRequest.h */; };
 		7AA5FD8F2598AA3000C5A6A4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AA5FD8E2598AA3000C5A6A4 /* AppDelegate.m */; };
@@ -25,15 +26,20 @@
 		7ADD26622598AF4B00051972 /* City.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ADD26612598AF4B00051972 /* City.m */; };
 		7ADD26662598AF5400051972 /* Country.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ADD26652598AF5400051972 /* Country.m */; };
 		7ADD266B2598B71800051972 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ADD266A2598B71800051972 /* DataManager.m */; };
+		F1C57FCC49061BBB82F79928 /* libPods-Avia Tickets.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CB7233CC89899F97707F0F17 /* libPods-Avia Tickets.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6389C8F0EE8E0181E19F96D2 /* Pods-Avia Tickets.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Avia Tickets.debug.xcconfig"; path = "Target Support Files/Pods-Avia Tickets/Pods-Avia Tickets.debug.xcconfig"; sourceTree = "<group>"; };
+		64C5D5E3501E16822A889041 /* Pods-Avia Tickets.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Avia Tickets.release.xcconfig"; path = "Target Support Files/Pods-Avia Tickets/Pods-Avia Tickets.release.xcconfig"; sourceTree = "<group>"; };
 		7A10B08E25A5C4B7008B6142 /* APIManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APIManager.h; sourceTree = "<group>"; };
 		7A10B08F25A5C4B7008B6142 /* APIManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APIManager.m; sourceTree = "<group>"; };
 		7A3DA97725AB5C180011DA97 /* Ticket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Ticket.h; sourceTree = "<group>"; };
 		7A3DA97825AB5C180011DA97 /* Ticket.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Ticket.m; sourceTree = "<group>"; };
 		7A3DA97C25AB709E0011DA97 /* TicketTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TicketTableViewCell.h; sourceTree = "<group>"; };
 		7A3DA97D25AB709E0011DA97 /* TicketTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TicketTableViewCell.m; sourceTree = "<group>"; };
+		7A3DA98525AB7D810011DA97 /* TicketsTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TicketsTableViewController.h; sourceTree = "<group>"; };
+		7A3DA98625AB7D810011DA97 /* TicketsTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TicketsTableViewController.m; sourceTree = "<group>"; };
 		7A4D862D25A06B3900E7C5EB /* PlaceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlaceViewController.h; sourceTree = "<group>"; };
 		7A4D862E25A06B3900E7C5EB /* PlaceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlaceViewController.m; sourceTree = "<group>"; };
 		7A4D863125A1B76D00E7C5EB /* SearchRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchRequest.h; sourceTree = "<group>"; };
@@ -59,6 +65,7 @@
 		7ADD26652598AF5400051972 /* Country.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Country.m; sourceTree = "<group>"; };
 		7ADD26692598B71800051972 /* DataManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
 		7ADD266A2598B71800051972 /* DataManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
+		CB7233CC89899F97707F0F17 /* libPods-Avia Tickets.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Avia Tickets.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,12 +73,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1C57FCC49061BBB82F79928 /* libPods-Avia Tickets.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0EDDBD803582ACA85589D217 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6389C8F0EE8E0181E19F96D2 /* Pods-Avia Tickets.debug.xcconfig */,
+				64C5D5E3501E16822A889041 /* Pods-Avia Tickets.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		7A3DA97B25AB707A0011DA97 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -86,6 +103,8 @@
 			children = (
 				7AA5FD8C2598AA3000C5A6A4 /* Avia Tickets */,
 				7AA5FD8B2598AA3000C5A6A4 /* Products */,
+				0EDDBD803582ACA85589D217 /* Pods */,
+				D3A3C844A419342E831521D4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -140,6 +159,8 @@
 				7AA5FD942598AA3000C5A6A4 /* MainViewController.m */,
 				7A4D862D25A06B3900E7C5EB /* PlaceViewController.h */,
 				7A4D862E25A06B3900E7C5EB /* PlaceViewController.m */,
+				7A3DA98525AB7D810011DA97 /* TicketsTableViewController.h */,
+				7A3DA98625AB7D810011DA97 /* TicketsTableViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -181,6 +202,14 @@
 			path = Managers;
 			sourceTree = "<group>";
 		};
+		D3A3C844A419342E831521D4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CB7233CC89899F97707F0F17 /* libPods-Avia Tickets.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -188,6 +217,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7AA5FDA32598AA3000C5A6A4 /* Build configuration list for PBXNativeTarget "Avia Tickets" */;
 			buildPhases = (
+				D6EC4BBADD3A74C8634D59AD /* [CP] Check Pods Manifest.lock */,
 				7AA5FD862598AA3000C5A6A4 /* Sources */,
 				7AA5FD872598AA3000C5A6A4 /* Frameworks */,
 				7AA5FD882598AA3000C5A6A4 /* Resources */,
@@ -247,6 +277,31 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		D6EC4BBADD3A74C8634D59AD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Avia Tickets-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		7AA5FD862598AA3000C5A6A4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -261,6 +316,7 @@
 				7AA5FD8F2598AA3000C5A6A4 /* AppDelegate.m in Sources */,
 				7ADD266B2598B71800051972 /* DataManager.m in Sources */,
 				7A4D863225A1B76D00E7C5EB /* SearchRequest.h in Sources */,
+				7A3DA98725AB7D810011DA97 /* TicketsTableViewController.m in Sources */,
 				7AA5FDA02598AA3000C5A6A4 /* main.m in Sources */,
 				7AA5FD922598AA3000C5A6A4 /* SceneDelegate.m in Sources */,
 				7A10B09025A5C4B7008B6142 /* APIManager.m in Sources */,
@@ -396,6 +452,7 @@
 		};
 		7AA5FDA42598AA3000C5A6A4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6389C8F0EE8E0181E19F96D2 /* Pods-Avia Tickets.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -414,6 +471,7 @@
 		};
 		7AA5FDA52598AA3000C5A6A4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 64C5D5E3501E16822A889041 /* Pods-Avia Tickets.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
