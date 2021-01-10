@@ -28,6 +28,7 @@ typedef enum {
 + (instancetype)sharedInstance;
 
 - (void)loadData;
+- (City *)cityForIATA:(NSString *)iata;
 
 @end
 

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7A10B09025A5C4B7008B6142 /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A10B08F25A5C4B7008B6142 /* APIManager.m */; };
+		7A3DA97925AB5C180011DA97 /* Ticket.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3DA97825AB5C180011DA97 /* Ticket.m */; };
+		7A3DA97E25AB709E0011DA97 /* TicketTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3DA97D25AB709E0011DA97 /* TicketTableViewCell.m */; };
 		7A4D862F25A06B3900E7C5EB /* PlaceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A4D862E25A06B3900E7C5EB /* PlaceViewController.m */; };
 		7A4D863225A1B76D00E7C5EB /* SearchRequest.h in Sources */ = {isa = PBXBuildFile; fileRef = 7A4D863125A1B76D00E7C5EB /* SearchRequest.h */; };
 		7AA5FD8F2598AA3000C5A6A4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AA5FD8E2598AA3000C5A6A4 /* AppDelegate.m */; };
@@ -25,6 +28,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7A10B08E25A5C4B7008B6142 /* APIManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APIManager.h; sourceTree = "<group>"; };
+		7A10B08F25A5C4B7008B6142 /* APIManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APIManager.m; sourceTree = "<group>"; };
+		7A3DA97725AB5C180011DA97 /* Ticket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Ticket.h; sourceTree = "<group>"; };
+		7A3DA97825AB5C180011DA97 /* Ticket.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Ticket.m; sourceTree = "<group>"; };
+		7A3DA97C25AB709E0011DA97 /* TicketTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TicketTableViewCell.h; sourceTree = "<group>"; };
+		7A3DA97D25AB709E0011DA97 /* TicketTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TicketTableViewCell.m; sourceTree = "<group>"; };
 		7A4D862D25A06B3900E7C5EB /* PlaceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlaceViewController.h; sourceTree = "<group>"; };
 		7A4D862E25A06B3900E7C5EB /* PlaceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlaceViewController.m; sourceTree = "<group>"; };
 		7A4D863125A1B76D00E7C5EB /* SearchRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchRequest.h; sourceTree = "<group>"; };
@@ -63,6 +72,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7A3DA97B25AB707A0011DA97 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				7A3DA97C25AB709E0011DA97 /* TicketTableViewCell.h */,
+				7A3DA97D25AB709E0011DA97 /* TicketTableViewCell.m */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		7AA5FD812598AA3000C5A6A4 = {
 			isa = PBXGroup;
 			children = (
@@ -85,6 +103,7 @@
 				7AA5FDA92598AA7200C5A6A4 /* AppDelegate */,
 				7AA5FDAB2598AA7B00C5A6A4 /* SceneDelegate */,
 				7AA5FDAD2598AA8700C5A6A4 /* ViewControllers */,
+				7A3DA97B25AB707A0011DA97 /* Cell */,
 				7ADD265B2598AC8400051972 /* Models */,
 				7ADD26682598B6F500051972 /* Managers */,
 				7AA5FD992598AA3000C5A6A4 /* Assets.xcassets */,
@@ -144,6 +163,8 @@
 				7ADD26612598AF4B00051972 /* City.m */,
 				7ADD26642598AF5400051972 /* Country.h */,
 				7ADD26652598AF5400051972 /* Country.m */,
+				7A3DA97725AB5C180011DA97 /* Ticket.h */,
+				7A3DA97825AB5C180011DA97 /* Ticket.m */,
 				7A4D863125A1B76D00E7C5EB /* SearchRequest.h */,
 			);
 			path = Models;
@@ -154,6 +175,8 @@
 			children = (
 				7ADD26692598B71800051972 /* DataManager.h */,
 				7ADD266A2598B71800051972 /* DataManager.m */,
+				7A10B08E25A5C4B7008B6142 /* APIManager.h */,
+				7A10B08F25A5C4B7008B6142 /* APIManager.m */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -232,6 +255,7 @@
 				7A4D862F25A06B3900E7C5EB /* PlaceViewController.m in Sources */,
 				7ADD26662598AF5400051972 /* Country.m in Sources */,
 				7AA5FD952598AA3000C5A6A4 /* MainViewController.m in Sources */,
+				7A3DA97E25AB709E0011DA97 /* TicketTableViewCell.m in Sources */,
 				7ADD265E2598AF3B00051972 /* Airport.m in Sources */,
 				7ADD26622598AF4B00051972 /* City.m in Sources */,
 				7AA5FD8F2598AA3000C5A6A4 /* AppDelegate.m in Sources */,
@@ -239,6 +263,8 @@
 				7A4D863225A1B76D00E7C5EB /* SearchRequest.h in Sources */,
 				7AA5FDA02598AA3000C5A6A4 /* main.m in Sources */,
 				7AA5FD922598AA3000C5A6A4 /* SceneDelegate.m in Sources */,
+				7A10B09025A5C4B7008B6142 /* APIManager.m in Sources */,
+				7A3DA97925AB5C180011DA97 /* Ticket.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -37,6 +37,17 @@
     });
 }
 
+- (City *)cityForIATA:(NSString *)iata {
+    if (iata) {
+        for (City *city in self.citites) {
+            if ([city.code isEqualToString:iata]) {
+                return city;
+            }
+        }
+    }
+    return nil;
+}
+
 - (NSArray *)arrayFromFile:(NSString *)filename ofType:(NSString *)type {
     NSString *path = [[NSBundle mainBundle] pathForResource:filename ofType:type];
     NSData *data = [NSData dataWithContentsOfFile:path options:0 error:nil];

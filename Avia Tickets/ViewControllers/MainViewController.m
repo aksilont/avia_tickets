@@ -8,12 +8,14 @@
 #import "MainViewController.h"
 #import "PlaceViewController.h"
 #import "DataManager.h"
+#import "APIManager.h"
 #import "SearchRequest.h"
 
 @interface MainViewController () <PlaceViewControllerDelegate>
 
 @property (nonatomic, weak) UIButton *departureButton;
 @property (nonatomic, weak) UIButton *arrivalButton;
+@property (nonatomic, weak) UIButton *searchButton;
 
 @property (nonatomic, assign) SearchRequest searchRequest;
 
@@ -32,23 +34,45 @@
     
     [[DataManager sharedInstance] loadData];
     
+    UIView *container = [[UIView alloc] initWithFrame:CGRectMake(20.0, 140.0, self.view.bounds.size.width - 40.0, 170.0)];
+    container.backgroundColor = [UIColor whiteColor];
+    container.layer.shadowColor = [[UIColor blackColor] colorWithAlphaComponent:0.1].CGColor;
+    container.layer.shadowRadius = 20.0;
+    container.layer.shadowOpacity = 1.0;
+    container.layer.cornerRadius = 6.0;
+    [self.view addSubview:container];
+    
     UIButton *depart = [UIButton buttonWithType:UIButtonTypeSystem];
     [depart addTarget:self action:@selector(didTapPlaceButton:) forControlEvents:UIControlEventTouchUpInside];
-    [depart setTitle:@"From" forState:UIControlStateNormal];
+    [depart setTitle:@"Departure" forState:UIControlStateNormal];
     depart.tintColor = [UIColor blackColor];
     depart.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.3];
-    depart.frame = CGRectMake(30.0, 140.0, [UIScreen mainScreen].bounds.size.width - 60.0, 60.0);
-    [self.view addSubview:depart];
+    depart.layer.cornerRadius = 4.0;
+    depart.frame = CGRectMake(10.0, 20.0, container.bounds.size.width - 20.0, 60.0);
+    [container addSubview:depart];
     self.departureButton = depart;
     
     UIButton *arrival = [UIButton buttonWithType:UIButtonTypeSystem];
     [arrival addTarget:self action:@selector(didTapPlaceButton:) forControlEvents:UIControlEventTouchUpInside];
-    [arrival setTitle:@"To" forState:UIControlStateNormal];
+    [arrival setTitle:@"Arrival" forState:UIControlStateNormal];
     arrival.tintColor = [UIColor blackColor];
     arrival.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.3];
-    arrival.frame = CGRectMake(30.0, CGRectGetMaxY(depart.frame) + 20.0, [UIScreen mainScreen].bounds.size.width - 60.0, 60.0);
-    [self.view addSubview:arrival];
+    arrival.layer.cornerRadius = 4.0;
+    arrival.frame = CGRectMake(10.0, CGRectGetMaxY(depart.frame) + 10.0, depart.bounds.size.width, depart.bounds.size.height);
+    [container addSubview:arrival];
     self.arrivalButton = arrival;
+    
+    UIButton *search = [UIButton buttonWithType:UIButtonTypeSystem];
+//    [search addTarget:self action:@selector(didTapPlaceButton:) forControlEvents:UIControlEventTouchUpInside];
+    [search setTitle:@"Search" forState:UIControlStateNormal];
+    search.titleLabel.font = [UIFont systemFontOfSize:20.0 weight:UIFontWeightBold];
+    search.tintColor = [UIColor whiteColor];
+    search.backgroundColor = [UIColor blackColor];
+    search.layer.cornerRadius = 8.0;
+    search.frame = CGRectMake(30.0, CGRectGetMaxY(container.frame) + 30.0, self.view.bounds.size.width - 60.0, 60.0);
+    [self.view addSubview:search];
+    self.searchButton = search;
+    
 }
 
 - (void)dealloc {
@@ -56,7 +80,10 @@
 }
 
 - (void)didLoadData {
-//    self.view.backgroundColor = [UIColor systemYellowColor];
+    [[APIManager sharedInstance] cityForCurrentIP:^(City * _Nonnull city) {
+        [self setPlace:city withType:PlaceTypeDeparture andDataType:DataSourceTypeCity forButton:self.departureButton];
+    }];
+    
 }
 
 - (void)selectPlace:(id)place withType:(PlaceType)placeType andDataType:(DataSourceType)dataType {
