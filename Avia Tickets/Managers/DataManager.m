@@ -48,6 +48,16 @@
     return nil;
 }
 
+- (City *)cityForLocation:(CLLocation *)location {
+    for (City *city in self.citites) {
+        if (ceilf(city.coordinate.latitude) == ceilf(location.coordinate.latitude) &&
+            ceilf(city.coordinate.longitude) == ceilf(location.coordinate.longitude)) {
+            return city;
+        }
+    }
+    return nil;
+}
+
 - (NSArray *)arrayFromFile:(NSString *)filename ofType:(NSString *)type {
     NSString *path = [[NSBundle mainBundle] pathForResource:filename ofType:type];
     NSData *data = [NSData dataWithContentsOfFile:path options:0 error:nil];

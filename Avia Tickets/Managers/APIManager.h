@@ -17,7 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)sharedInstance;
 
 - (void)cityForCurrentIP:(void (^)(City *city))completion;
-- (void)ticketsWithRequest:(SearchRequest)request withCompletion:(void (^)(NSArray *tickets))cpmpletion;
+- (void)ticketsWithRequest:(SearchRequest)request withCompletion:(void (^)(NSArray *tickets))completion;
+- (void)mapPriceFor:(City *)origin withCompletion:(void (^)(NSArray *prices))completion;
 
 @end
 
