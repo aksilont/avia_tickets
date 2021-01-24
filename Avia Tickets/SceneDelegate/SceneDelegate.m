@@ -8,6 +8,8 @@
 #import "SceneDelegate.h"
 #import "MainViewController.h"
 #import "MapViewController.h"
+#import "TabBarController.h"
+#import "TicketsTableViewController.h"
 
 @interface SceneDelegate ()
 
@@ -15,39 +17,28 @@
 
 @implementation SceneDelegate
 
-
 - (void)scene:(UIScene *)scene willConnectToSession:(UISceneSession *)session options:(UISceneConnectionOptions *)connectionOptions {
     UIWindowScene *windowScene = (UIWindowScene *)scene;
     UIWindow *window = [[UIWindow alloc] initWithFrame:windowScene.coordinateSpace.bounds];
     window.windowScene = windowScene;
-    
-//    MainViewController *vc = [MainViewController new];
-    MapViewController *vc = [MapViewController new];
-    window.rootViewController = [[UINavigationController alloc] initWithRootViewController:vc];
-    
+//    window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[MainViewController new]];
+    window.rootViewController = [TabBarController new];
     [window makeKeyAndVisible];
     self.window = window;
 }
 
-
 - (void)sceneDidDisconnect:(UIScene *)scene {
 }
-
 
 - (void)sceneDidBecomeActive:(UIScene *)scene {
 }
 
-
 - (void)sceneWillResignActive:(UIScene *)scene {
 }
-
 
 - (void)sceneWillEnterForeground:(UIScene *)scene {
 }
 
-
 - (void)sceneDidEnterBackground:(UIScene *)scene {
 }
-
-
 @end

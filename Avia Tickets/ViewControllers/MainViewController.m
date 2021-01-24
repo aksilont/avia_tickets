@@ -30,7 +30,7 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.prefersLargeTitles = YES;
+    self.navigationController.navigationBar.prefersLargeTitles = NO;
     self.title = @"Search";
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didLoadData) name:kDataManagerLoadDataDidComplete object:nil];
@@ -111,7 +111,7 @@
     [[APIManager sharedInstance] ticketsWithRequest:self.searchRequest withCompletion:^(NSArray * _Nonnull tickets) {
         if (tickets.count > 0) {
             TicketsTableViewController *vc = [[TicketsTableViewController alloc] initWithTickets:tickets];
-            [self.navigationController showViewController:vc sender:sender];
+            [self.navigationController pushViewController:vc animated:YES];
         } else {
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Oops!" message:@"No tickets found" preferredStyle:UIAlertControllerStyleAlert];
             [alert addAction:[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:nil]];
@@ -148,7 +148,6 @@
     }
     
     [button setTitle:title forState:UIControlStateNormal];
-    
 }
 
 @end

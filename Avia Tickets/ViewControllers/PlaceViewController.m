@@ -10,12 +10,13 @@
 
 #define kReuseIdentifier @"CellIdentifier"
 
-@interface PlaceViewController ()
+@interface PlaceViewController () <UISearchResultsUpdating>
 
 @property (nonatomic, assign) PlaceType placeType;
 @property (nonatomic, weak) UITableView *tableView;
 @property (nonatomic, weak) UISegmentedControl *segmentedControl;
 @property (nonatomic, copy) NSArray *currentArray;
+@property (nonatomic, copy) NSArray *filteredArray;
 
 @end
 
@@ -37,6 +38,13 @@
     table.dataSource = self;
     self.tableView = table;
     [self.view addSubview:table];
+    
+    UISearchController *searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
+    searchController.obscuresBackgroundDuringPresentation = NO;
+    searchController.searchResultsUpdater = self;
+    self.filteredArray = @[];
+    
+    self.navigationItem.searchController = searchController;
     
     UISegmentedControl *segments = [[UISegmentedControl alloc] initWithItems:@[@"Cities", @"Airports"]];
     [segments addTarget:self action:@selector(changeSource:) forControlEvents:UIControlEventValueChanged];
@@ -70,10 +78,22 @@
     [self.tableView reloadData];
 }
 
-#pragma mark - Table view data source
+#pragma mark - UISearchResultsUpdating
+
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
+    if (searchController.searchBar.text) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name CONTAINS[cd] %@", searchController.searchBar.text];
+        self.filteredArray = [self.currentArray filteredArrayUsingPredicate:predicate];
+    } else {
+        self.filteredArray = @[];
+    }
+    [self.tableView reloadData];
+}
+
+#pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.currentArray.count;
+    return self.filteredArray.count > 0 ? self.filteredArray.count : self.currentArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -82,12 +102,13 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:kReuseIdentifier];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
+    NSArray *array = self.filteredArray.count > 0 ? self.filteredArray : self.currentArray;
     if (self.segmentedControl.selectedSegmentIndex == 0) {
-        City *city = self.currentArray[indexPath.row];
+        City *city = array[indexPath.row];
         cell.textLabel.text = city.name;
         cell.detailTextLabel.text = city.code;
     } else {
-        Airport *airport = self.currentArray[indexPath.row];
+        Airport *airport = array[indexPath.row];
         cell.textLabel.text = airport.name;
         cell.detailTextLabel.text = airport.code;
     }
@@ -98,7 +119,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     DataSourceType dataType = ((int)self.segmentedControl.selectedSegmentIndex + 1);
-    [self.delegate selectPlace:self.currentArray[indexPath.row] withType:self.placeType andDataType:dataType];
+    NSArray *array = self.filteredArray.count > 0 ? self.filteredArray : self.currentArray;
+    [self.delegate selectPlace:array[indexPath.row] withType:self.placeType andDataType:dataType];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

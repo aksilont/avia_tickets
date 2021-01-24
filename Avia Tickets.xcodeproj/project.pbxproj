@@ -29,6 +29,7 @@
 		7ADD26622598AF4B00051972 /* City.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ADD26612598AF4B00051972 /* City.m */; };
 		7ADD26662598AF5400051972 /* Country.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ADD26652598AF5400051972 /* Country.m */; };
 		7ADD266B2598B71800051972 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ADD266A2598B71800051972 /* DataManager.m */; };
+		7AF26D5025BE0962004C9DF3 /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF26D4F25BE0962004C9DF3 /* TabBarController.m */; };
 		F1C57FCC49061BBB82F79928 /* libPods-Avia Tickets.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CB7233CC89899F97707F0F17 /* libPods-Avia Tickets.a */; };
 /* End PBXBuildFile section */
 
@@ -74,6 +75,8 @@
 		7ADD26652598AF5400051972 /* Country.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Country.m; sourceTree = "<group>"; };
 		7ADD26692598B71800051972 /* DataManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
 		7ADD266A2598B71800051972 /* DataManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
+		7AF26D4E25BE0962004C9DF3 /* TabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabBarController.h; sourceTree = "<group>"; };
+		7AF26D4F25BE0962004C9DF3 /* TabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
 		CB7233CC89899F97707F0F17 /* libPods-Avia Tickets.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Avia Tickets.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -172,6 +175,8 @@
 				7A3DA98625AB7D810011DA97 /* TicketsTableViewController.m */,
 				7A5D6B0025B725F300E71E17 /* MapViewController.h */,
 				7A5D6B0125B725F300E71E17 /* MapViewController.m */,
+				7AF26D4E25BE0962004C9DF3 /* TabBarController.h */,
+				7AF26D4F25BE0962004C9DF3 /* TabBarController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -325,6 +330,7 @@
 				7A5D6AFE25B5D20F00E71E17 /* LocationManager.m in Sources */,
 				7A4D862F25A06B3900E7C5EB /* PlaceViewController.m in Sources */,
 				7ADD26662598AF5400051972 /* Country.m in Sources */,
+				7AF26D5025BE0962004C9DF3 /* TabBarController.m in Sources */,
 				7AA5FD952598AA3000C5A6A4 /* MainViewController.m in Sources */,
 				7A3DA97E25AB709E0011DA97 /* TicketTableViewCell.m in Sources */,
 				7ADD265E2598AF3B00051972 /* Airport.m in Sources */,
