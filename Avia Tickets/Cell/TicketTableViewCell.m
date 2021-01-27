@@ -6,6 +6,8 @@
 //
 
 #import "TicketTableViewCell.h"
+#import "Ticket.h"
+#import "FavoriteTicket+CoreDataClass.h"
 
 #import <YYWebImage/YYWebImage.h>
 
@@ -80,7 +82,20 @@
     
     NSURL *urlLogo = [NSURL URLWithString:[NSString stringWithFormat:@"https://pics.avs.io/200/200/%@.png", ticket.airline]];
     [self.airlineLogoView yy_setImageWithURL:urlLogo options:YYWebImageOptionSetImageWithFadeAnimation];
+}
 
+- (void)setFavorite:(FavoriteTicket *)ticket {
+    _favorite = ticket;
+    
+    self.priceLabel.text = [NSString stringWithFormat:@"%lld ₽", ticket.price];
+    self.placesLabel.text = [NSString stringWithFormat:@"%@ - %@", ticket.from, ticket.to];
+    
+    NSDateFormatter *dateFormatter = [NSDateFormatter new];
+    dateFormatter.dateFormat = @"dd MMMM yyyy hh:mm";
+    self.dateLabel.text = [dateFormatter stringFromDate:ticket.departure];
+    
+    NSURL *urlLogo = [NSURL URLWithString:[NSString stringWithFormat:@"https://pics.avs.io/200/200/%@.png", ticket.airline]];
+    [self.airlineLogoView yy_setImageWithURL:urlLogo options:YYWebImageOptionSetImageWithFadeAnimation];
 }
 
 @end

@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		7A10B09025A5C4B7008B6142 /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A10B08F25A5C4B7008B6142 /* APIManager.m */; };
+		7A1CCC1725C0BDA300D31230 /* Tickets.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7A1CCC1525C0BDA300D31230 /* Tickets.xcdatamodeld */; };
+		7A1CCC1D25C0BF8A00D31230 /* FavoriteTicket+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1CCC1B25C0BF8A00D31230 /* FavoriteTicket+CoreDataClass.m */; };
+		7A1CCC1E25C0BF8A00D31230 /* FavoriteTicket+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1CCC1C25C0BF8A00D31230 /* FavoriteTicket+CoreDataProperties.m */; };
+		7A1CCC2225C0BFD500D31230 /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1CCC2125C0BFD500D31230 /* CoreDataManager.m */; };
 		7A3DA97925AB5C180011DA97 /* Ticket.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3DA97825AB5C180011DA97 /* Ticket.m */; };
 		7A3DA97E25AB709E0011DA97 /* TicketTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3DA97D25AB709E0011DA97 /* TicketTableViewCell.m */; };
 		7A3DA98725AB7D810011DA97 /* TicketsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3DA98625AB7D810011DA97 /* TicketsTableViewController.m */; };
@@ -38,6 +42,13 @@
 		64C5D5E3501E16822A889041 /* Pods-Avia Tickets.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Avia Tickets.release.xcconfig"; path = "Target Support Files/Pods-Avia Tickets/Pods-Avia Tickets.release.xcconfig"; sourceTree = "<group>"; };
 		7A10B08E25A5C4B7008B6142 /* APIManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APIManager.h; sourceTree = "<group>"; };
 		7A10B08F25A5C4B7008B6142 /* APIManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APIManager.m; sourceTree = "<group>"; };
+		7A1CCC1625C0BDA300D31230 /* Tickets.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Tickets.xcdatamodel; sourceTree = "<group>"; };
+		7A1CCC1925C0BF8A00D31230 /* FavoriteTicket+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FavoriteTicket+CoreDataProperties.h"; sourceTree = "<group>"; };
+		7A1CCC1A25C0BF8A00D31230 /* FavoriteTicket+CoreDataClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FavoriteTicket+CoreDataClass.h"; sourceTree = "<group>"; };
+		7A1CCC1B25C0BF8A00D31230 /* FavoriteTicket+CoreDataClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "FavoriteTicket+CoreDataClass.m"; sourceTree = "<group>"; };
+		7A1CCC1C25C0BF8A00D31230 /* FavoriteTicket+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "FavoriteTicket+CoreDataProperties.m"; sourceTree = "<group>"; };
+		7A1CCC2025C0BFD500D31230 /* CoreDataManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreDataManager.h; sourceTree = "<group>"; };
+		7A1CCC2125C0BFD500D31230 /* CoreDataManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoreDataManager.m; sourceTree = "<group>"; };
 		7A3DA97725AB5C180011DA97 /* Ticket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Ticket.h; sourceTree = "<group>"; };
 		7A3DA97825AB5C180011DA97 /* Ticket.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Ticket.m; sourceTree = "<group>"; };
 		7A3DA97C25AB709E0011DA97 /* TicketTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TicketTableViewCell.h; sourceTree = "<group>"; };
@@ -101,6 +112,18 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		7A1CCC1425C0BD8000D31230 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				7A1CCC1A25C0BF8A00D31230 /* FavoriteTicket+CoreDataClass.h */,
+				7A1CCC1B25C0BF8A00D31230 /* FavoriteTicket+CoreDataClass.m */,
+				7A1CCC1925C0BF8A00D31230 /* FavoriteTicket+CoreDataProperties.h */,
+				7A1CCC1C25C0BF8A00D31230 /* FavoriteTicket+CoreDataProperties.m */,
+				7A1CCC1525C0BDA300D31230 /* Tickets.xcdatamodeld */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
 		7A3DA97B25AB707A0011DA97 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -138,6 +161,7 @@
 				7ADD265B2598AC8400051972 /* Models */,
 				7ADD26682598B6F500051972 /* Managers */,
 				7AA5FD992598AA3000C5A6A4 /* Assets.xcassets */,
+				7A1CCC1425C0BD8000D31230 /* Database */,
 				7AA5FD9B2598AA3000C5A6A4 /* LaunchScreen.storyboard */,
 				7AA5FD9E2598AA3000C5A6A4 /* Info.plist */,
 				7AA5FD9F2598AA3000C5A6A4 /* main.m */,
@@ -218,6 +242,8 @@
 				7A10B08F25A5C4B7008B6142 /* APIManager.m */,
 				7A5D6AFC25B5D20F00E71E17 /* LocationManager.h */,
 				7A5D6AFD25B5D20F00E71E17 /* LocationManager.m */,
+				7A1CCC2025C0BFD500D31230 /* CoreDataManager.h */,
+				7A1CCC2125C0BFD500D31230 /* CoreDataManager.m */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -328,6 +354,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A5D6AFE25B5D20F00E71E17 /* LocationManager.m in Sources */,
+				7A1CCC1D25C0BF8A00D31230 /* FavoriteTicket+CoreDataClass.m in Sources */,
 				7A4D862F25A06B3900E7C5EB /* PlaceViewController.m in Sources */,
 				7ADD26662598AF5400051972 /* Country.m in Sources */,
 				7AF26D5025BE0962004C9DF3 /* TabBarController.m in Sources */,
@@ -335,11 +362,14 @@
 				7A3DA97E25AB709E0011DA97 /* TicketTableViewCell.m in Sources */,
 				7ADD265E2598AF3B00051972 /* Airport.m in Sources */,
 				7ADD26622598AF4B00051972 /* City.m in Sources */,
+				7A1CCC1E25C0BF8A00D31230 /* FavoriteTicket+CoreDataProperties.m in Sources */,
 				7AA5FD8F2598AA3000C5A6A4 /* AppDelegate.m in Sources */,
 				7ADD266B2598B71800051972 /* DataManager.m in Sources */,
 				7A4D863225A1B76D00E7C5EB /* SearchRequest.h in Sources */,
 				7A5D6AFA25B5CED200E71E17 /* MapPrice.m in Sources */,
 				7A3DA98725AB7D810011DA97 /* TicketsTableViewController.m in Sources */,
+				7A1CCC1725C0BDA300D31230 /* Tickets.xcdatamodeld in Sources */,
+				7A1CCC2225C0BFD500D31230 /* CoreDataManager.m in Sources */,
 				7AA5FDA02598AA3000C5A6A4 /* main.m in Sources */,
 				7AA5FD922598AA3000C5A6A4 /* SceneDelegate.m in Sources */,
 				7A10B09025A5C4B7008B6142 /* APIManager.m in Sources */,
@@ -534,6 +564,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		7A1CCC1525C0BDA300D31230 /* Tickets.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				7A1CCC1625C0BDA300D31230 /* Tickets.xcdatamodel */,
+			);
+			currentVersion = 7A1CCC1625C0BDA300D31230 /* Tickets.xcdatamodel */;
+			path = Tickets.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 7AA5FD822598AA3000C5A6A4 /* Project object */;
 }

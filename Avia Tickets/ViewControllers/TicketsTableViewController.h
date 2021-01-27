@@ -11,6 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TicketsTableViewController : UITableViewController
 
+- (instancetype)initAsFavoriteTickets;
 - (instancetype)initWithTickets:(NSArray *)tickets;
 
 @end
