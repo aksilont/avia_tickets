@@ -59,7 +59,6 @@
 //    [super viewWillAppear:animated];
 //    if (self.isFavorites) {
 //        self.tickets = [[CoreDataManager sharedInstance] favorites];
-//        [self.tableView reloadData];
 //    }
 //}
 

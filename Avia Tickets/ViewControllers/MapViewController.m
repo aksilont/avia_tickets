@@ -46,9 +46,6 @@
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self selector:@selector(didLoadData) name:kDataManagerLoadDataDidComplete object:nil];
     [nc addObserver:self selector:@selector(didUpdateLocation:) name:kLocationManagerDidUpdateLocation object:nil];
-    
-    NSArray<FavoriteMapPrice *> *mapPrices = [[CoreDataManager sharedInstance] favoriteMapPrices];
-    NSLog(@"In favorites - %ld items", mapPrices.count);
 }
 
 - (void)didLoadData {
@@ -113,11 +110,6 @@
         annotation.index = (NSInteger *)[prices indexOfObject:price];
         [self.mapView addAnnotation:annotation];
     }
-    
-//    if (prices.count > 0) {
-//        MapPrice *object = prices.firstObject;
-//        [[CoreDataManager sharedInstance] addToFavoriteMapPrice:object];
-//    }
 }
 
 - (void)dealloc {

@@ -82,9 +82,12 @@
     
     self.airlineLogoView.image = nil;
     NSURL *urlLogo = [NSURL URLWithString:[NSString stringWithFormat:@"https://pics.avs.io/200/200/%@.png", ticket.airline]];
-    dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_queue_global_t globalQueue = dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0);
+    dispatch_async(globalQueue, ^{
         NSData *imgData = [NSData dataWithContentsOfURL:urlLogo];
-        self.airlineLogoView.image = [UIImage imageWithData:imgData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.airlineLogoView.image = [UIImage imageWithData:imgData];
+        });
     });
 }
 
@@ -99,8 +102,8 @@
     self.dateLabel.text = [dateFormatter stringFromDate:ticket.departure];
     
     self.airlineLogoView.image = nil;
-    dispatch_queue_global_t globalQueue = dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0);
     NSURL *urlLogo = [NSURL URLWithString:[NSString stringWithFormat:@"https://pics.avs.io/200/200/%@.png", ticket.airline]];
+    dispatch_queue_global_t globalQueue = dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0);
     dispatch_async(globalQueue, ^{
         NSData *imgData = [NSData dataWithContentsOfURL:urlLogo];
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -120,8 +123,8 @@
     self.dateLabel.text = [dateFormatter stringFromDate:favoriteMapPrice.departure];
     
     self.airlineLogoView.image = nil;
-    dispatch_queue_global_t globalQueue = dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0);
     NSURL *urlLogo = [NSURL URLWithString:[NSString stringWithFormat:@"https://pics.avs.io/200/200/%@.png", favoriteMapPrice.airline]];
+    dispatch_queue_global_t globalQueue = dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0);
     dispatch_async(globalQueue, ^{
         NSData *imgData = [NSData dataWithContentsOfURL:urlLogo];
         dispatch_async(dispatch_get_main_queue(), ^{
