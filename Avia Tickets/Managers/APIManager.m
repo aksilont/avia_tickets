@@ -60,7 +60,6 @@
                 ticket.to = request.destination;
                 [tickets addObject:ticket];
             }
-            
         }
         dispatch_async(dispatch_get_main_queue(), ^{
             completion(tickets);

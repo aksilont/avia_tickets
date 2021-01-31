@@ -20,6 +20,7 @@
         self.numberOfChanges = [dictionary[@"number_of_changes"] integerValue];
         self.value = [dictionary[@"value"] integerValue];
         self.distance = [dictionary[@"distance"] integerValue];
+        self.airline = dictionary[@"airline"];
         self.actual = [dictionary[@"actual"] boolValue];
     }
     return self;

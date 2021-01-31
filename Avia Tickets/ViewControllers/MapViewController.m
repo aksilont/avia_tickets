@@ -12,10 +12,12 @@
 #import "APIManager.h"
 #import "DataManager.h"
 #import "LocationManager.h"
+#import "CoreDataManager.h"
 
 #import "City.h"
 #import "MapPrice.h"
-
+#import "FavoriteMapPrice+CoreDataClass.h"
+#import "PointAnnotationMapPrice.h"
 
 @interface MapViewController () <MKMapViewDelegate>
 
@@ -44,6 +46,9 @@
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self selector:@selector(didLoadData) name:kDataManagerLoadDataDidComplete object:nil];
     [nc addObserver:self selector:@selector(didUpdateLocation:) name:kLocationManagerDidUpdateLocation object:nil];
+    
+    NSArray<FavoriteMapPrice *> *mapPrices = [[CoreDataManager sharedInstance] favoriteMapPrices];
+    NSLog(@"In favorites - %ld items", mapPrices.count);
 }
 
 - (void)didLoadData {
@@ -52,7 +57,7 @@
 
 - (void)didUpdateLocation:(NSNotification *)notification {
     CLLocation *currentLocation = notification.object;
-    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(currentLocation.coordinate, 1000, 1000);
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(currentLocation.coordinate, 1000000, 1000000);
     [self.mapView setRegion:region animated:YES];
     
     if (currentLocation) {
@@ -65,18 +70,54 @@
     }
 }
 
+- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
+    
+    PointAnnotationMapPrice *an = (PointAnnotationMapPrice *)view.annotation;
+    
+    UIAlertController *sheet = [UIAlertController alertControllerWithTitle:@"Ticket action" message:@"What do you wanna do with the ticket?" preferredStyle:UIAlertControllerStyleActionSheet];
+
+    UIAlertAction *action;
+    MapPrice *price = [self.prices objectAtIndex:(unsigned)an.index];
+    CoreDataManager *manager = [CoreDataManager sharedInstance];
+    if ([manager isFavoriteMapPrice:price]) {
+        action = [UIAlertAction actionWithTitle:@"Remove from favorites" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+            [manager removeFromFavoriteMapPrice:price];
+            [mapView deselectAnnotation:view.annotation animated:YES];
+        }];
+    } else {
+        action = [UIAlertAction actionWithTitle:@"Add to favorites" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [manager addToFavoriteMapPrice:price];
+            [mapView deselectAnnotation:view.annotation animated:YES];
+        }];
+    }
+    [sheet addAction:action];
+    
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        [mapView deselectAnnotation:view.annotation animated:YES];
+    }];
+    [sheet addAction:cancel];
+    
+    [self presentViewController:sheet animated:YES completion:nil];
+}
+
 - (void)setPrices:(NSArray *)prices {
     _prices = [prices copy];
     
     [self.mapView removeAnnotations:self.mapView.annotations];
     
     for (MapPrice *price in prices) {
-        MKPointAnnotation *annotation = [MKPointAnnotation new];
+        PointAnnotationMapPrice *annotation = [PointAnnotationMapPrice new];
         annotation.title = [NSString stringWithFormat:@"%@ (%@)", price.destination.name, price.destination.code];
         annotation.subtitle = [NSString stringWithFormat:@"%ld ₽", (long)price.value];
         annotation.coordinate = price.destination.coordinate;
+        annotation.index = (NSInteger *)[prices indexOfObject:price];
         [self.mapView addAnnotation:annotation];
     }
+    
+//    if (prices.count > 0) {
+//        MapPrice *object = prices.firstObject;
+//        [[CoreDataManager sharedInstance] addToFavoriteMapPrice:object];
+//    }
 }
 
 - (void)dealloc {

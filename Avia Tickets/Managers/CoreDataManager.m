@@ -7,6 +7,7 @@
 
 #import "CoreDataManager.h"
 #import "Ticket.h"
+#import "MapPrice.h"
 
 @interface CoreDataManager ()
 
@@ -25,6 +26,8 @@
     return instance;
 }
 
+#pragma mark - Favorite tickets
+
 - (BOOL)isFavorite:(Ticket *)ticket {
     return [self favoriteFromTicket:ticket] != nil;
 }
@@ -33,7 +36,8 @@
     NSFetchRequest *request = [FavoriteTicket fetchRequest];
     NSError *error;
     request.sortDescriptors = @[
-        [NSSortDescriptor sortDescriptorWithKey:@"created" ascending:NO]
+//        [NSSortDescriptor sortDescriptorWithKey:@"created" ascending:NO]
+        [NSSortDescriptor sortDescriptorWithKey:@"departure" ascending:YES]
     ];
     
     NSArray *tickets = [self.persistentContainer.viewContext executeFetchRequest:request error:&error];
@@ -65,7 +69,7 @@
     }
 }
 
-#pragma mark - Private
+#pragma mark - Favorite tickets Private
 
 - (FavoriteTicket *)favoriteFromTicket:(Ticket *)ticket {
     NSManagedObjectContext *context = self.persistentContainer.viewContext;
@@ -86,6 +90,69 @@
         return nil;
     }
     return tickets.firstObject;
+}
+
+#pragma mark - Favorite map prices
+
+- (BOOL)isFavoriteMapPrice:(MapPrice *)price {
+    return [self favoriteFromMapPrice:price] != nil;
+}
+
+- (NSArray<FavoriteMapPrice *> *)favoriteMapPrices {
+    NSFetchRequest *request = [FavoriteMapPrice fetchRequest];
+    NSError *error;
+    request.sortDescriptors = @[
+//        [NSSortDescriptor sortDescriptorWithKey:@"created" ascending:NO]
+        [NSSortDescriptor sortDescriptorWithKey:@"departure" ascending:YES]
+    ];
+    
+    NSArray *mapPrices = [self.persistentContainer.viewContext executeFetchRequest:request error:&error];
+    if (error) {
+        NSLog(@"%@", error.localizedDescription);
+    }
+    return mapPrices;
+}
+
+- (void)addToFavoriteMapPrice:(MapPrice *)mapPrice {
+    FavoriteMapPrice *object = [NSEntityDescription insertNewObjectForEntityForName:@"FavoriteMapPrice" inManagedObjectContext:self.persistentContainer.viewContext];
+    object.created = [NSDate date];
+    object.destination = mapPrice.destination.code;
+    object.origin = mapPrice.origin.code;
+    object.departure = mapPrice.departure;
+    object.returnDate = mapPrice.returnDate;
+    object.value = mapPrice.value;
+    object.airline = mapPrice.airline;
+    [self saveContext];
+}
+
+- (void)removeFromFavoriteMapPrice:(MapPrice *)mapPrice {
+    FavoriteMapPrice *object = [self favoriteFromMapPrice:mapPrice];
+    if (object) {
+        [self.persistentContainer.viewContext deleteObject:object];
+        [self saveContext];
+    }
+}
+
+#pragma mark - Favorite map prices Private
+
+- (FavoriteMapPrice *)favoriteFromMapPrice:(MapPrice *)mapPrice {
+    NSManagedObjectContext *context = self.persistentContainer.viewContext;
+    NSFetchRequest *request = [FavoriteMapPrice fetchRequest];
+    NSError *error;
+    NSString *formatPredicate = @"destination == %@ AND origin == %@ AND departure == %@ AND returnDate == %@ AND value == %ld AND airline == %@";
+    request.predicate = [NSPredicate predicateWithFormat:formatPredicate,
+                         mapPrice.destination.code,
+                         mapPrice.origin.code,
+                         mapPrice.departure,
+                         mapPrice.returnDate,
+                         mapPrice.value,
+                         mapPrice.airline];
+    NSArray *mapPrices = [context executeFetchRequest:request error:&error];
+    if (error) {
+        NSLog(@"%@", error.localizedDescription);
+        return nil;
+    }
+    return mapPrices.firstObject;
 }
 
 #pragma mark - Core Data stack

@@ -6,10 +6,10 @@
 //
 
 #import "TicketTableViewCell.h"
+
 #import "Ticket.h"
 #import "FavoriteTicket+CoreDataClass.h"
-
-#import <YYWebImage/YYWebImage.h>
+#import "FavoriteMapPrice+CoreDataClass.h"
 
 @interface TicketTableViewCell ()
 
@@ -80,8 +80,12 @@
     dateFormatter.dateFormat = @"dd MMMM yyyy hh:mm";
     self.dateLabel.text = [dateFormatter stringFromDate:ticket.departure];
     
+    self.airlineLogoView.image = nil;
     NSURL *urlLogo = [NSURL URLWithString:[NSString stringWithFormat:@"https://pics.avs.io/200/200/%@.png", ticket.airline]];
-    [self.airlineLogoView yy_setImageWithURL:urlLogo options:YYWebImageOptionSetImageWithFadeAnimation];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSData *imgData = [NSData dataWithContentsOfURL:urlLogo];
+        self.airlineLogoView.image = [UIImage imageWithData:imgData];
+    });
 }
 
 - (void)setFavorite:(FavoriteTicket *)ticket {
@@ -94,8 +98,37 @@
     dateFormatter.dateFormat = @"dd MMMM yyyy hh:mm";
     self.dateLabel.text = [dateFormatter stringFromDate:ticket.departure];
     
+    self.airlineLogoView.image = nil;
+    dispatch_queue_global_t globalQueue = dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0);
     NSURL *urlLogo = [NSURL URLWithString:[NSString stringWithFormat:@"https://pics.avs.io/200/200/%@.png", ticket.airline]];
-    [self.airlineLogoView yy_setImageWithURL:urlLogo options:YYWebImageOptionSetImageWithFadeAnimation];
+    dispatch_async(globalQueue, ^{
+        NSData *imgData = [NSData dataWithContentsOfURL:urlLogo];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.airlineLogoView.image = [UIImage imageWithData:imgData];
+        });
+    });
+}
+
+- (void)setFavoriteMapPrice:(FavoriteMapPrice *)favoriteMapPrice {
+    _favoriteMapPrice = favoriteMapPrice;
+    
+    self.priceLabel.text = [NSString stringWithFormat:@"%lld ₽", favoriteMapPrice.value];
+    self.placesLabel.text = [NSString stringWithFormat:@"%@ - %@", favoriteMapPrice.origin, favoriteMapPrice.destination];
+    
+    NSDateFormatter *dateFormatter = [NSDateFormatter new];
+    dateFormatter.dateFormat = @"dd MMMM yyyy hh:mm";
+    self.dateLabel.text = [dateFormatter stringFromDate:favoriteMapPrice.departure];
+    
+    self.airlineLogoView.image = nil;
+    dispatch_queue_global_t globalQueue = dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0);
+    NSURL *urlLogo = [NSURL URLWithString:[NSString stringWithFormat:@"https://pics.avs.io/200/200/%@.png", favoriteMapPrice.airline]];
+    dispatch_async(globalQueue, ^{
+        NSData *imgData = [NSData dataWithContentsOfURL:urlLogo];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.airlineLogoView.image = [UIImage imageWithData:imgData];
+        });
+    });
+    
 }
 
 @end

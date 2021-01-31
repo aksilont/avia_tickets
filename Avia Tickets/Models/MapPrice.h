@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger numberOfChanges;
 @property (nonatomic, assign) NSInteger value;
 @property (nonatomic, assign) NSInteger distance;
+@property (nonatomic, strong) NSString *airline;
 @property (nonatomic, assign) BOOL actual;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary withOrigin:(City *)origin;

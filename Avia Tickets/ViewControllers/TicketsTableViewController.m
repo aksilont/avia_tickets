@@ -14,6 +14,8 @@
 @property (nonatomic, assign) BOOL isFavorites;
 @property (nonatomic, strong) NSArray *tickets;
 
+@property (nonatomic, weak) UISegmentedControl *segmentedControl;
+
 @end
 
 @implementation TicketsTableViewController
@@ -22,6 +24,13 @@
     self = [self initWithTickets:@[]];
     if (self) {
         self.isFavorites = YES;
+        UISegmentedControl *segments = [[UISegmentedControl alloc] initWithItems:@[@"Tickets", @"Map prices"]];
+        [segments addTarget:self action:@selector(changeSource:) forControlEvents:UIControlEventValueChanged];
+        segments.tintColor = [UIColor blackColor];
+        segments.selectedSegmentIndex = 0;
+        self.navigationItem.titleView = segments;
+        self.segmentedControl = segments;
+        [self changeSource:segments];
     }
     return self;
 }
@@ -46,12 +55,30 @@
     [self.tableView registerClass:TicketTableViewCell.class forCellReuseIdentifier:[TicketTableViewCell identifier]];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    if (self.isFavorites) {
-        self.tickets = [[CoreDataManager sharedInstance] favorites];
-        [self.tableView reloadData];
+//- (void)viewWillAppear:(BOOL)animated {
+//    [super viewWillAppear:animated];
+//    if (self.isFavorites) {
+//        self.tickets = [[CoreDataManager sharedInstance] favorites];
+//        [self.tableView reloadData];
+//    }
+//}
+
+#pragma mark - UI actions
+
+- (void)changeSource:(UISegmentedControl *)sender {
+    switch (self.segmentedControl.selectedSegmentIndex) {
+        case 0:
+            self.tickets = [[CoreDataManager sharedInstance] favorites];
+            [self.tableView reloadData];
+            break;
+        case 1:
+            self.tickets = [[CoreDataManager sharedInstance] favoriteMapPrices];
+            [self.tableView reloadData];
+            break;
+        default:
+            break;
     }
+    [self.tableView reloadData];
 }
 
 #pragma mark - Table view data source
@@ -63,7 +90,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TicketTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[TicketTableViewCell identifier] forIndexPath:indexPath];
     if (self.isFavorites) {
-        cell.favorite = self.tickets[indexPath.row];
+        if (self.segmentedControl.selectedSegmentIndex == 0) {
+            cell.favorite = self.tickets[indexPath.row];
+        } else if (self.segmentedControl.selectedSegmentIndex == 1) {
+            cell.favoriteMapPrice = self.tickets[indexPath.row];
+        }
     } else {
         cell.ticket = self.tickets[indexPath.row];
     }
