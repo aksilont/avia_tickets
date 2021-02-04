@@ -8,9 +8,11 @@
 #import "MainViewController.h"
 #import "PlaceViewController.h"
 #import "TicketsTableViewController.h"
+#import "FirstViewController.h"
 
 #import "DataManager.h"
 #import "APIManager.h"
+#import "ProgressView.h"
 
 #import "SearchRequest.h"
 
@@ -25,6 +27,21 @@
 @end
 
 @implementation MainViewController
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:YES];
+    
+    [self presentFirstViewControllerIfNeeded];
+}
+
+- (void)presentFirstViewControllerIfNeeded {
+    BOOL isFirstStart = [[NSUserDefaults standardUserDefaults] boolForKey:@"first_start"];
+    if (!isFirstStart) {
+        FirstViewController *firstVC = [[FirstViewController alloc] initWithTransitionStyle:(UIPageViewControllerTransitionStyleScroll) navigationOrientation:(UIPageViewControllerNavigationOrientationHorizontal) options:nil];
+        firstVC.modalPresentationStyle = UIModalPresentationFullScreen;
+        [self presentViewController:firstVC animated:YES completion:nil];
+    }
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -108,16 +125,27 @@
 }
 
 - (void)didTapSearchButton:(UIButton *)sender {
-    [[APIManager sharedInstance] ticketsWithRequest:self.searchRequest withCompletion:^(NSArray * _Nonnull tickets) {
-        if (tickets.count > 0) {
-            TicketsTableViewController *vc = [[TicketsTableViewController alloc] initWithTickets:tickets];
-            [self.navigationController pushViewController:vc animated:YES];
-        } else {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Oops!" message:@"No tickets found" preferredStyle:UIAlertControllerStyleAlert];
-            [alert addAction:[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:nil]];
-            [self presentViewController:alert animated:YES completion:nil];
-        }
-    }];
+    if (self.searchRequest.origin && self.searchRequest.destination) {
+        [[ProgressView sharedInstance] show:^{
+            [[APIManager sharedInstance] ticketsWithRequest:self.searchRequest withCompletion:^(NSArray * _Nonnull tickets) {
+                [[ProgressView sharedInstance] dismiss:^{
+                    if (tickets.count > 0) {
+                        TicketsTableViewController *vc = [[TicketsTableViewController alloc] initWithTickets:tickets];
+                        [self.navigationController pushViewController:vc animated:YES];
+                    } else {
+                        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Oops!" message:@"No tickets found" preferredStyle:UIAlertControllerStyleAlert];
+                        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+                        [self presentViewController:alert animated:YES completion:nil];
+                    }
+                }];
+            }];
+        }];
+    } else {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error!" message:@"Please choose origin and destination" preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+
 }
 
 - (void)setPlace:(id)place withType:(PlaceType)placeType andDataType:(DataSourceType)dataType forButton:(UIButton *)button {

@@ -7,7 +7,6 @@
 
 #import "PlaceViewController.h"
 
-
 #define kReuseIdentifier @"CellIdentifier"
 
 @interface PlaceViewController () <UISearchResultsUpdating>
@@ -18,6 +17,8 @@
 @property (nonatomic, copy) NSArray *currentArray;
 @property (nonatomic, copy) NSArray *filteredArray;
 
+@property (nonatomic, assign) BOOL isSearching;
+
 @end
 
 @implementation PlaceViewController
@@ -26,6 +27,7 @@
     self = [super init];
     if (self) {
         self.placeType = type;
+        self.isSearching = NO;
     }
     return self;
 }
@@ -81,11 +83,13 @@
 #pragma mark - UISearchResultsUpdating
 
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
-    if (searchController.searchBar.text) {
+    if (searchController.searchBar.text.length > 0) {
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name CONTAINS[cd] %@", searchController.searchBar.text];
         self.filteredArray = [self.currentArray filteredArrayUsingPredicate:predicate];
+        self.isSearching = YES;
     } else {
         self.filteredArray = @[];
+        self.isSearching = NO;
     }
     [self.tableView reloadData];
 }
@@ -93,7 +97,7 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.filteredArray.count > 0 ? self.filteredArray.count : self.currentArray.count;
+    return (self.filteredArray.count > 0 || self.isSearching) ? self.filteredArray.count : self.currentArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

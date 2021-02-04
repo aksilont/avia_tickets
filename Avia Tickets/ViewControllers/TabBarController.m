@@ -38,8 +38,8 @@
     mapVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Map"
                                                       image:[UIImage systemImageNamed:@"map"]
                                               selectedImage:[UIImage systemImageNamed:@"map.fill"]];
-    UINavigationController *mapNC = [[UINavigationController alloc] initWithRootViewController:mapVC];
-    [controllers addObject:mapNC];
+//    UINavigationController *mapNC = [[UINavigationController alloc] initWithRootViewController:mapVC];
+    [controllers addObject:mapVC];
     
     TicketsTableViewController *favoriteVC = [[TicketsTableViewController alloc] initAsFavoriteTickets];
     favoriteVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Favorites"
