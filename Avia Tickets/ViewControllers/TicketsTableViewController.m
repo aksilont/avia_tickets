@@ -19,8 +19,8 @@
 @property (nonatomic, strong) TicketTableViewCell *notificationCell;
 @property (nonatomic, strong) NSArray *tickets;
 
-@property (nonatomic, strong) UIDatePicker *datePicker;
-@property (nonatomic, strong) UITextField *dateTextField;
+@property (nonatomic, weak) UIDatePicker *datePicker;
+@property (nonatomic, weak) UITextField *dateTextField;
 @property (nonatomic, weak) UISegmentedControl *segmentedControl;
 
 @end
