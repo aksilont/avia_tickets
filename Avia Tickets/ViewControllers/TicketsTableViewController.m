@@ -180,7 +180,7 @@
     
     UIAlertAction *notification = [UIAlertAction actionWithTitle:@"Remind me" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
         self.notificationCell = [tableView cellForRowAtIndexPath:indexPath];
-        [self.datePicker becomeFirstResponder];
+        [self.dateTextField becomeFirstResponder];
     }];
     
     [sheet addAction:action];
