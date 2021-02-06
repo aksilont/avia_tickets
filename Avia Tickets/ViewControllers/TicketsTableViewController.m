@@ -7,13 +7,20 @@
 
 #import "TicketsTableViewController.h"
 #import "TicketTableViewCell.h"
+
+#import "Ticket.h"
+
 #import "CoreDataManager.h"
+#import "NotificationCenter.h"
 
 @interface TicketsTableViewController ()
 
 @property (nonatomic, assign) BOOL isFavorites;
+@property (nonatomic, strong) TicketTableViewCell *notificationCell;
 @property (nonatomic, strong) NSArray *tickets;
 
+@property (nonatomic, weak) UIDatePicker *datePicker;
+@property (nonatomic, weak) UITextField *dateTextField;
 @property (nonatomic, weak) UISegmentedControl *segmentedControl;
 
 @end
@@ -21,9 +28,10 @@
 @implementation TicketsTableViewController
 
 - (instancetype)initAsFavoriteTickets {
-    self = [self initWithTickets:@[]];
+    self = [self init];
     if (self) {
         self.isFavorites = YES;
+        self.tickets = @[];
         UISegmentedControl *segments = [[UISegmentedControl alloc] initWithItems:@[@"Tickets", @"Map prices"]];
         [segments addTarget:self action:@selector(changeSource:) forControlEvents:UIControlEventValueChanged];
         segments.tintColor = [UIColor blackColor];
@@ -39,6 +47,25 @@
     self = [super self];
     if (self) {
         self.tickets = tickets;
+        
+        UIDatePicker *picker = [UIDatePicker new];
+        picker.datePickerMode = UIDatePickerModeDateAndTime;
+        picker.minimumDate = [NSDate date];
+        self.datePicker = picker;
+        
+        UITextField *textField = [[UITextField alloc] initWithFrame:self.view.bounds];
+        textField.hidden = YES;
+        textField.inputView = picker;
+        
+        UIToolbar *keyboardToolbar = [UIToolbar new];
+        [keyboardToolbar sizeToFit];
+        UIBarButtonItem *flexBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:(UIBarButtonSystemItemFlexibleSpace) target:nil action:nil];
+        UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:(UIBarButtonSystemItemDone) target:self action:@selector(doneButtonDidTap:)];
+        keyboardToolbar.items = @[flexBarButton, doneBarButton];
+        
+        textField.inputAccessoryView = keyboardToolbar;
+        [self.view addSubview:textField];
+        self.dateTextField = textField;
     }
     return self;
 }
@@ -47,20 +74,10 @@
     [super viewDidLoad];
     
     self.title = self.isFavorites ? @"Favorites" : @"Tickets";
-//    self.navigationController.navigationBar.prefersLargeTitles = self.isFavorites;
-//    self.navigationController.navigationBar.prefersLargeTitles = YES;
-    
+    self.navigationController.navigationBar.prefersLargeTitles = YES;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
-    [self.tableView registerClass:TicketTableViewCell.class forCellReuseIdentifier:[TicketTableViewCell identifier]];
+    [self.tableView registerClass:[TicketTableViewCell class] forCellReuseIdentifier:[TicketTableViewCell identifier]];
 }
-
-//- (void)viewWillAppear:(BOOL)animated {
-//    [super viewWillAppear:animated];
-//    if (self.isFavorites) {
-//        self.tickets = [[CoreDataManager sharedInstance] favorites];
-//    }
-//}
 
 #pragma mark - UI actions
 
@@ -78,6 +95,38 @@
             break;
     }
     [self.tableView reloadData];
+}
+
+- (void)doneButtonDidTap:(UIBarButtonItem *)sender {
+    if (self.datePicker.date && self.notificationCell) {
+        NSString *message = [NSString stringWithFormat:@"%@ - %@ by %@ ₽", self.notificationCell.ticket.from, self.notificationCell.ticket.to, self.notificationCell.ticket.price];
+        
+        NSURL *imageURL;
+        if (self.notificationCell.airlineLogoView.image) {
+            NSString *airlinePath = [NSString stringWithFormat:@"/%@", self.notificationCell.ticket.airline];
+            NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingString:airlinePath];
+            if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
+                UIImage *logo = self.notificationCell.airlineLogoView.image;
+                NSData *pngData = UIImagePNGRepresentation(logo);
+                [pngData writeToFile:path atomically:YES];
+            }
+            imageURL = [NSURL fileURLWithPath:path];
+        }
+        
+        Notification notification = notificationMake(@"Notification about ticket", message, self.datePicker.date, imageURL);
+        [[NotificationCenter sharedInstance] sendNotification:notification];
+        
+        UIAlertController *alertController = [UIAlertController
+                                              alertControllerWithTitle:@"Success"
+                                              message:[NSString stringWithFormat:@"Notification will be send at %@", self.datePicker.date]
+                                              preferredStyle:(UIAlertControllerStyleAlert)];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"OK" style:(UIAlertActionStyleCancel) handler:nil];
+        [alertController addAction:cancelAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
+    self.datePicker.date = [NSDate date];
+    self.notificationCell = nil;
+    [self.view endEditing:YES];
 }
 
 #pragma mark - Table view data source
@@ -112,7 +161,7 @@
     }
     
     UIAlertController *sheet = [UIAlertController alertControllerWithTitle:@"Ticket action" message:@"What do you wanna do with the ticket?" preferredStyle:UIAlertControllerStyleActionSheet];
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cansel" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
     
     UIAlertAction *action;
     Ticket *ticket = self.tickets[indexPath.row];
@@ -126,7 +175,14 @@
             [manager addToFavorite:ticket];
         }];
     }
+    
+    UIAlertAction *notification = [UIAlertAction actionWithTitle:@"Remind me" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        self.notificationCell = [tableView cellForRowAtIndexPath:indexPath];
+        [self.datePicker becomeFirstResponder];
+    }];
+    
     [sheet addAction:action];
+    [sheet addAction:notification];
     [sheet addAction:cancel];
     
     [self presentViewController:sheet animated:YES completion:nil];

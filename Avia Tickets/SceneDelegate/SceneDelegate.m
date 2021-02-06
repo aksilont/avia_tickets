@@ -6,10 +6,9 @@
 //
 
 #import "SceneDelegate.h"
-#import "MainViewController.h"
-#import "MapViewController.h"
 #import "TabBarController.h"
-#import "TicketsTableViewController.h"
+
+#import "NotificationCenter.h"
 
 @interface SceneDelegate ()
 
@@ -21,10 +20,11 @@
     UIWindowScene *windowScene = (UIWindowScene *)scene;
     UIWindow *window = [[UIWindow alloc] initWithFrame:windowScene.coordinateSpace.bounds];
     window.windowScene = windowScene;
-//    window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[MainViewController new]];
     window.rootViewController = [TabBarController new];
     [window makeKeyAndVisible];
     self.window = window;
+    
+    [[NotificationCenter sharedInstance] registerService];
 }
 
 - (void)sceneDidDisconnect:(UIScene *)scene {

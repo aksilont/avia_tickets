@@ -23,6 +23,7 @@
 		7A5D6AFE25B5D20F00E71E17 /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A5D6AFD25B5D20F00E71E17 /* LocationManager.m */; };
 		7A5D6B0225B725F300E71E17 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A5D6B0125B725F300E71E17 /* MapViewController.m */; };
 		7A818D5525C6E130009FAC90 /* PointAnnotationMapPrice.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A818D5425C6E130009FAC90 /* PointAnnotationMapPrice.m */; };
+		7A9511AC25CD9860007851AA /* NotificationCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9511AB25CD9860007851AA /* NotificationCenter.m */; };
 		7AA5FD8F2598AA3000C5A6A4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AA5FD8E2598AA3000C5A6A4 /* AppDelegate.m */; };
 		7AA5FD922598AA3000C5A6A4 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AA5FD912598AA3000C5A6A4 /* SceneDelegate.m */; };
 		7AA5FD952598AA3000C5A6A4 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AA5FD942598AA3000C5A6A4 /* MainViewController.m */; };
@@ -73,6 +74,8 @@
 		7A5D6B0125B725F300E71E17 /* MapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		7A818D5325C6E130009FAC90 /* PointAnnotationMapPrice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PointAnnotationMapPrice.h; sourceTree = "<group>"; };
 		7A818D5425C6E130009FAC90 /* PointAnnotationMapPrice.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PointAnnotationMapPrice.m; sourceTree = "<group>"; };
+		7A9511AA25CD9860007851AA /* NotificationCenter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationCenter.h; sourceTree = "<group>"; };
+		7A9511AB25CD9860007851AA /* NotificationCenter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationCenter.m; sourceTree = "<group>"; };
 		7AA5FD8A2598AA3000C5A6A4 /* Avia Tickets.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Avia Tickets.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AA5FD8D2598AA3000C5A6A4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7AA5FD8E2598AA3000C5A6A4 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -282,6 +285,8 @@
 				7A5D6AFD25B5D20F00E71E17 /* LocationManager.m */,
 				7A1CCC2025C0BFD500D31230 /* CoreDataManager.h */,
 				7A1CCC2125C0BFD500D31230 /* CoreDataManager.m */,
+				7A9511AA25CD9860007851AA /* NotificationCenter.h */,
+				7A9511AB25CD9860007851AA /* NotificationCenter.m */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -381,6 +386,7 @@
 				7AA5FD922598AA3000C5A6A4 /* SceneDelegate.m in Sources */,
 				7A59624225C35D9900F193D9 /* FavoriteMapPrice+CoreDataProperties.m in Sources */,
 				7AB55E3C25CB4B7D006864DA /* FirstViewController.m in Sources */,
+				7A9511AC25CD9860007851AA /* NotificationCenter.m in Sources */,
 				7A10B09025A5C4B7008B6142 /* APIManager.m in Sources */,
 				7A5D6B0225B725F300E71E17 /* MapViewController.m in Sources */,
 				7A3DA97925AB5C180011DA97 /* Ticket.m in Sources */,
