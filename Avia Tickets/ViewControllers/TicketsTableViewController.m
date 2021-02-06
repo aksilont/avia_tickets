@@ -19,8 +19,8 @@
 @property (nonatomic, strong) TicketTableViewCell *notificationCell;
 @property (nonatomic, strong) NSArray *tickets;
 
-@property (nonatomic, weak) UIDatePicker *datePicker;
-@property (nonatomic, weak) UITextField *dateTextField;
+@property (nonatomic, strong) UIDatePicker *datePicker;
+@property (nonatomic, strong) UITextField *dateTextField;
 @property (nonatomic, weak) UISegmentedControl *segmentedControl;
 
 @end
@@ -44,28 +44,9 @@
 }
 
 - (instancetype)initWithTickets:(NSArray *)tickets {
-    self = [super self];
+    self = [super init];
     if (self) {
         self.tickets = tickets;
-        
-        UIDatePicker *picker = [UIDatePicker new];
-        picker.datePickerMode = UIDatePickerModeDateAndTime;
-        picker.minimumDate = [NSDate date];
-        self.datePicker = picker;
-        
-        UITextField *textField = [[UITextField alloc] initWithFrame:self.view.bounds];
-        textField.hidden = YES;
-        textField.inputView = picker;
-        
-        UIToolbar *keyboardToolbar = [UIToolbar new];
-        [keyboardToolbar sizeToFit];
-        UIBarButtonItem *flexBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:(UIBarButtonSystemItemFlexibleSpace) target:nil action:nil];
-        UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:(UIBarButtonSystemItemDone) target:self action:@selector(doneButtonDidTap:)];
-        keyboardToolbar.items = @[flexBarButton, doneBarButton];
-        
-        textField.inputAccessoryView = keyboardToolbar;
-        [self.view addSubview:textField];
-        self.dateTextField = textField;
     }
     return self;
 }
@@ -76,7 +57,28 @@
     self.title = self.isFavorites ? @"Favorites" : @"Tickets";
     self.navigationController.navigationBar.prefersLargeTitles = YES;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self.tableView registerClass:[TicketTableViewCell class] forCellReuseIdentifier:[TicketTableViewCell identifier]];
+    [self.tableView registerClass:TicketTableViewCell.class forCellReuseIdentifier:[TicketTableViewCell identifier]];
+    
+    if (!self.isFavorites) {
+        UIDatePicker *picker = [[UIDatePicker alloc] init];
+        picker.datePickerMode = UIDatePickerModeDateAndTime;
+        picker.minimumDate = [NSDate date];
+        self.datePicker = picker;
+
+        UITextField *textField = [[UITextField alloc] initWithFrame:self.view.bounds];
+        textField.hidden = YES;
+        textField.inputView = picker;
+
+        UIToolbar *keyboardToolbar = [UIToolbar new];
+        [keyboardToolbar sizeToFit];
+        UIBarButtonItem *flexBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:(UIBarButtonSystemItemFlexibleSpace) target:nil action:nil];
+        UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:(UIBarButtonSystemItemDone) target:self action:@selector(doneButtonDidTap:)];
+        keyboardToolbar.items = @[flexBarButton, doneBarButton];
+
+        textField.inputAccessoryView = keyboardToolbar;
+        self.dateTextField = textField;
+        [self.view addSubview:textField];
+    }
 }
 
 #pragma mark - UI actions
