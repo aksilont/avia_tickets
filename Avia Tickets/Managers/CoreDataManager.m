@@ -69,6 +69,11 @@
     }
 }
 
+- (void)removeFavoriteTicket:(FavoriteTicket *)ticket {
+    [self.persistentContainer.viewContext deleteObject:ticket];
+    [self saveContext];
+}
+
 #pragma mark - Favorite tickets Private
 
 - (FavoriteTicket *)favoriteFromTicket:(Ticket *)ticket {
@@ -133,6 +138,10 @@
     }
 }
 
+- (void)removeFavoriteMapPrice:(FavoriteMapPrice *)mapPrice {
+    [self.persistentContainer.viewContext deleteObject:mapPrice];
+    [self saveContext];
+}
 #pragma mark - Favorite map prices Private
 
 - (FavoriteMapPrice *)favoriteFromMapPrice:(MapPrice *)mapPrice {

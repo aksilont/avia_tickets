@@ -59,26 +59,25 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView registerClass:TicketTableViewCell.class forCellReuseIdentifier:[TicketTableViewCell identifier]];
     
-    if (!self.isFavorites) {
-        UIDatePicker *picker = [[UIDatePicker alloc] init];
-        picker.datePickerMode = UIDatePickerModeDateAndTime;
-        picker.minimumDate = [NSDate date];
-        self.datePicker = picker;
-
-        UITextField *textField = [[UITextField alloc] initWithFrame:self.view.bounds];
-        textField.hidden = YES;
-        textField.inputView = picker;
-
-        UIToolbar *keyboardToolbar = [UIToolbar new];
-        [keyboardToolbar sizeToFit];
-        UIBarButtonItem *flexBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:(UIBarButtonSystemItemFlexibleSpace) target:nil action:nil];
-        UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:(UIBarButtonSystemItemDone) target:self action:@selector(doneButtonDidTap:)];
-        keyboardToolbar.items = @[flexBarButton, doneBarButton];
-
-        textField.inputAccessoryView = keyboardToolbar;
-        self.dateTextField = textField;
-        [self.view addSubview:textField];
-    }
+    UIDatePicker *picker = [[UIDatePicker alloc] init];
+    picker.datePickerMode = UIDatePickerModeDateAndTime;
+    picker.preferredDatePickerStyle = UIDatePickerStyleWheels;
+    picker.minimumDate = [NSDate date];
+    self.datePicker = picker;
+    
+    UITextField *textField = [[UITextField alloc] initWithFrame:self.view.bounds];
+    textField.hidden = YES;
+    textField.inputView = picker;
+    
+    UIToolbar *keyboardToolbar = [UIToolbar new];
+    [keyboardToolbar sizeToFit];
+    UIBarButtonItem *flexBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:(UIBarButtonSystemItemFlexibleSpace) target:nil action:nil];
+    UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:(UIBarButtonSystemItemDone) target:self action:@selector(doneButtonDidTap:)];
+    keyboardToolbar.items = @[flexBarButton, doneBarButton];
+    
+    textField.inputAccessoryView = keyboardToolbar;
+    self.dateTextField = textField;
+    [self.view addSubview:textField];
 }
 
 #pragma mark - UI actions
@@ -96,12 +95,24 @@
         default:
             break;
     }
-    [self.tableView reloadData];
 }
 
 - (void)doneButtonDidTap:(UIBarButtonItem *)sender {
+    [self.dateTextField endEditing:YES];
     if (self.datePicker.date && self.notificationCell) {
-        NSString *message = [NSString stringWithFormat:@"%@ - %@ by %@ ₽", self.notificationCell.ticket.from, self.notificationCell.ticket.to, self.notificationCell.ticket.price];
+        NSString *title;
+        NSString *message;
+        if (self.isFavorites) {
+            title = @"Favorite ticket reminder";
+            if (self.segmentedControl.selectedSegmentIndex == 0) {
+                message = [NSString stringWithFormat:@"%@ - %@ by %lld ₽", self.notificationCell.favorite.from, self.notificationCell.favorite.to, self.notificationCell.favorite.price];
+            } else if (self.segmentedControl.selectedSegmentIndex == 1) {
+                message = [NSString stringWithFormat:@"%@ - %@ by %lld ₽", self.notificationCell.favoriteMapPrice.origin, self.notificationCell.favoriteMapPrice.destination, self.notificationCell.favoriteMapPrice.value];
+            }
+        } else {
+            title = @"Reminder of the ticket";
+            message = [NSString stringWithFormat:@"%@ - %@ by %@ ₽", self.notificationCell.ticket.from, self.notificationCell.ticket.to, self.notificationCell.ticket.price];
+        }
         
         NSURL *imageURL;
         if (self.notificationCell.airlineLogoView.image) {
@@ -115,7 +126,7 @@
             imageURL = [NSURL fileURLWithPath:path];
         }
         
-        Notification notification = notificationMake(@"Notification about ticket", message, self.datePicker.date, imageURL);
+        Notification notification = notificationMake(title, message, self.datePicker.date, imageURL);
         [[NotificationCenter sharedInstance] sendNotification:notification];
         
         UIAlertController *alertController = [UIAlertController
@@ -128,7 +139,6 @@
     }
     self.datePicker.date = [NSDate date];
     self.notificationCell = nil;
-    [self.view endEditing:YES];
 }
 
 #pragma mark - Table view data source
@@ -139,6 +149,9 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TicketTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[TicketTableViewCell identifier] forIndexPath:indexPath];
+    cell.contentView.alpha = 0.0;
+    CGRect originFrame = cell.contentView.frame;
+    cell.contentView.frame = CGRectZero;
     if (self.isFavorites) {
         if (self.segmentedControl.selectedSegmentIndex == 0) {
             cell.favorite = self.tickets[indexPath.row];
@@ -148,6 +161,10 @@
     } else {
         cell.ticket = self.tickets[indexPath.row];
     }
+    [UIView animateWithDuration:1.0 delay:0.0 usingSpringWithDamping:0.5 initialSpringVelocity:1.0 options:(UIViewAnimationOptionCurveLinear) animations:^{
+        cell.contentView.alpha = 1.0;
+        cell.frame = originFrame;
+    } completion:nil];
     return cell;
 }
 
@@ -158,24 +175,32 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.isFavorites) {
-        return;
-    }
-    
     UIAlertController *sheet = [UIAlertController alertControllerWithTitle:@"Ticket action" message:@"What do you wanna do with the ticket?" preferredStyle:UIAlertControllerStyleActionSheet];
     UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
     
     UIAlertAction *action;
-    Ticket *ticket = self.tickets[indexPath.row];
     CoreDataManager *manager = [CoreDataManager sharedInstance];
-    if ([manager isFavorite:ticket]) {
+    id currentTicket = self.tickets[indexPath.row];
+    if (self.isFavorites) {
         action = [UIAlertAction actionWithTitle:@"Remove from favorites" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-            [manager removeFromFavorite:ticket];
+            if (self.segmentedControl.selectedSegmentIndex == 0) {
+                [manager removeFavoriteTicket:(FavoriteTicket *)currentTicket];
+            } else if (self.segmentedControl.selectedSegmentIndex == 1) {
+                [manager removeFavoriteMapPrice:(FavoriteMapPrice *)currentTicket];
+            }
+            [self changeSource:nil];
         }];
     } else {
-        action = [UIAlertAction actionWithTitle:@"Add to favorites" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [manager addToFavorite:ticket];
-        }];
+        Ticket *ticket = (Ticket *)currentTicket;
+        if ([manager isFavorite:ticket]) {
+            action = [UIAlertAction actionWithTitle:@"Remove from favorites" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+                [manager removeFromFavorite:ticket];
+            }];
+        } else {
+            action = [UIAlertAction actionWithTitle:@"Add to favorites" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                [manager addToFavorite:ticket];
+            }];
+        }
     }
     
     UIAlertAction *notification = [UIAlertAction actionWithTitle:@"Remind me" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {

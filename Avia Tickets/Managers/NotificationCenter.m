@@ -72,4 +72,8 @@ Notification notificationMake(NSString * _Nullable title, NSString * _Nonnull bo
     return notification;
 }
 
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler {
+    
+}
+
 @end
