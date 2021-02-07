@@ -74,7 +74,8 @@
     UIAlertController *sheet = [UIAlertController alertControllerWithTitle:@"Ticket action" message:@"What do you wanna do with the ticket?" preferredStyle:UIAlertControllerStyleActionSheet];
 
     UIAlertAction *action;
-    MapPrice *price = [self.prices objectAtIndex:(unsigned)an.index];
+//    MapPrice *price = [self.prices objectAtIndex:(unsigned)an.index];
+    MapPrice *price = an.price;
     CoreDataManager *manager = [CoreDataManager sharedInstance];
     if ([manager isFavoriteMapPrice:price]) {
         action = [UIAlertAction actionWithTitle:@"Remove from favorites" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
@@ -108,6 +109,7 @@
         annotation.subtitle = [NSString stringWithFormat:@"%ld ₽", (long)price.value];
         annotation.coordinate = price.destination.coordinate;
         annotation.index = (NSInteger *)[prices indexOfObject:price];
+        annotation.price = price;
         [self.mapView addAnnotation:annotation];
     }
 }

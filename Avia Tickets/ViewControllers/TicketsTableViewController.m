@@ -161,7 +161,7 @@
     } else {
         cell.ticket = self.tickets[indexPath.row];
     }
-    [UIView animateWithDuration:1.0 delay:0.0 usingSpringWithDamping:0.5 initialSpringVelocity:1.0 options:(UIViewAnimationOptionCurveLinear) animations:^{
+    [UIView animateWithDuration:0.7 delay:0.0 usingSpringWithDamping:0.5 initialSpringVelocity:0.9 options:(UIViewAnimationOptionCurveLinear) animations:^{
         cell.contentView.alpha = 1.0;
         cell.frame = originFrame;
     } completion:nil];
