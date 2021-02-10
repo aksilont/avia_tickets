@@ -73,7 +73,12 @@ Notification notificationMake(NSString * _Nullable title, NSString * _Nonnull bo
 }
 
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler {
-    
+    NSString *title = ((UNMutableNotificationContent *)response.notification.request.content).title;
+    NSString *descriptionTitle = ((UNMutableNotificationContent *)response.notification.request.content).body;
+    NSLog(@"Обработка нажатия на уведомление");
+    NSLog(@"Информацию по уведомлению билета:");
+    NSLog(@"%@ : %@", title, descriptionTitle);
+    completionHandler();
 }
 
 @end

@@ -13,6 +13,7 @@
 #import "DataManager.h"
 #import "LocationManager.h"
 #import "CoreDataManager.h"
+#import "NSString+Localize.h"
 
 #import "City.h"
 #import "MapPrice.h"
@@ -33,7 +34,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"Prices map";
+    self.title = [@"map_tab" localize];
     
     MKMapView *map = [[MKMapView alloc] initWithFrame:self.view.bounds];
     map.delegate = self;
@@ -71,26 +72,26 @@
     
     PointAnnotationMapPrice *an = (PointAnnotationMapPrice *)view.annotation;
     
-    UIAlertController *sheet = [UIAlertController alertControllerWithTitle:@"Ticket action" message:@"What do you wanna do with the ticket?" preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController *sheet = [UIAlertController alertControllerWithTitle:[@"actions_with_tickets" localize] message:[@"actions_with_tickets_describe" localize] preferredStyle:UIAlertControllerStyleActionSheet];
 
     UIAlertAction *action;
 //    MapPrice *price = [self.prices objectAtIndex:(unsigned)an.index];
     MapPrice *price = an.price;
     CoreDataManager *manager = [CoreDataManager sharedInstance];
     if ([manager isFavoriteMapPrice:price]) {
-        action = [UIAlertAction actionWithTitle:@"Remove from favorites" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        action = [UIAlertAction actionWithTitle:[@"remove_from_favorite" localize] style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
             [manager removeFromFavoriteMapPrice:price];
             [mapView deselectAnnotation:view.annotation animated:YES];
         }];
     } else {
-        action = [UIAlertAction actionWithTitle:@"Add to favorites" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        action = [UIAlertAction actionWithTitle:[@"add_to_favorite" localize] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             [manager addToFavoriteMapPrice:price];
             [mapView deselectAnnotation:view.annotation animated:YES];
         }];
     }
     [sheet addAction:action];
     
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:[@"close" localize] style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         [mapView deselectAnnotation:view.annotation animated:YES];
     }];
     [sheet addAction:cancel];

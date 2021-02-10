@@ -13,6 +13,7 @@
 #import "DataManager.h"
 #import "APIManager.h"
 #import "ProgressView.h"
+#import "NSString+Localize.h"
 
 #import "SearchRequest.h"
 
@@ -48,7 +49,7 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.navigationBar.prefersLargeTitles = NO;
-    self.title = @"Search";
+    self.title = [@"main_search" localize];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didLoadData) name:kDataManagerLoadDataDidComplete object:nil];
     
@@ -64,7 +65,7 @@
     
     UIButton *depart = [UIButton buttonWithType:UIButtonTypeSystem];
     [depart addTarget:self action:@selector(didTapPlaceButton:) forControlEvents:UIControlEventTouchUpInside];
-    [depart setTitle:@"Departure" forState:UIControlStateNormal];
+    [depart setTitle:[@"main_from" localize] forState:UIControlStateNormal];
     depart.tintColor = [UIColor blackColor];
     depart.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.3];
     depart.layer.cornerRadius = 4.0;
@@ -74,7 +75,7 @@
     
     UIButton *arrival = [UIButton buttonWithType:UIButtonTypeSystem];
     [arrival addTarget:self action:@selector(didTapPlaceButton:) forControlEvents:UIControlEventTouchUpInside];
-    [arrival setTitle:@"Arrival" forState:UIControlStateNormal];
+    [arrival setTitle:[@"main_to" localize] forState:UIControlStateNormal];
     arrival.tintColor = [UIColor blackColor];
     arrival.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.3];
     arrival.layer.cornerRadius = 4.0;
@@ -84,7 +85,7 @@
     
     UIButton *search = [UIButton buttonWithType:UIButtonTypeSystem];
     [search addTarget:self action:@selector(didTapSearchButton:) forControlEvents:UIControlEventTouchUpInside];
-    [search setTitle:@"Search" forState:UIControlStateNormal];
+    [search setTitle:[@"main_search" localize] forState:UIControlStateNormal];
     search.titleLabel.font = [UIFont systemFontOfSize:20.0 weight:UIFontWeightBold];
     search.tintColor = [UIColor whiteColor];
     search.backgroundColor = [UIColor blackColor];
@@ -133,7 +134,7 @@
                         TicketsTableViewController *vc = [[TicketsTableViewController alloc] initWithTickets:tickets];
                         [self.navigationController pushViewController:vc animated:YES];
                     } else {
-                        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Oops!" message:@"No tickets found" preferredStyle:UIAlertControllerStyleAlert];
+                        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Oops!" message:[@"tickets_not_found" localize] preferredStyle:UIAlertControllerStyleAlert];
                         [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
                         [self presentViewController:alert animated:YES completion:nil];
                     }
@@ -141,7 +142,7 @@
             }];
         }];
     } else {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error!" message:@"Please choose origin and destination" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:[@"error" localize] message:[@"not_set_place_arrival_or_departure" localize] preferredStyle:UIAlertControllerStyleAlert];
         [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
         [self presentViewController:alert animated:YES completion:nil];
     }

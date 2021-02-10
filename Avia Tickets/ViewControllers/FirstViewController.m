@@ -7,6 +7,7 @@
 
 #import "FirstViewController.h"
 #import "ContentViewController.h"
+#import "NSString+Localize.h"
 
 #define CONTENT_COUNT 4
 
@@ -54,8 +55,8 @@
 }
 
 - (void)createContentDataArray {
-    NSArray *titles = [NSArray arrayWithObjects:@"About", @"Avia Tickets", @"Map price", @"Favorites", nil];
-    NSArray *contents = [NSArray arrayWithObjects:@"App for ticket search", @"Find the cheapest tickets", @"View the price map", @"Save your  tickets to favorites", nil];
+    NSArray *titles = [NSArray arrayWithObjects:[@"about_app_header" localize], [@"tickets_header" localize], [@"map_price_header" localize], [@"favorites_header" localize], nil];
+    NSArray *contents = [NSArray arrayWithObjects:[@"about_app_describe" localize], [@"tickets_describe" localize], [@"map_price_describe" localize], [@"favorites_describe" localize], nil];
     for (int i = 0; i < 4; ++i) {
         contentData[i].title = [titles objectAtIndex:i];
         contentData[i].contentText = [contents objectAtIndex:i];
@@ -80,11 +81,11 @@
         case 0:
         case 1:
         case 2:
-            [self.nextButton setTitle:@"Next" forState:UIControlStateNormal];
+            [self.nextButton setTitle:[@"next_button" localize] forState:UIControlStateNormal];
             self.nextButton.tag = 0;
             break;
         case 3:
-            [self.nextButton setTitle:@"Ready" forState:UIControlStateNormal];
+            [self.nextButton setTitle:[@"done_button" localize] forState:UIControlStateNormal];
             self.nextButton.tag = 1;
             break;
         default:

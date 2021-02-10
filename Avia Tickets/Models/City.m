@@ -25,8 +25,20 @@
                 self.coordinate = CLLocationCoordinate2DMake(lat.doubleValue, lon.doubleValue);
             }
         }
+        [self localizeName];
     }
     return self;
+}
+
+- (void)localizeName {
+    if (!self.translations) return;
+    NSLocale *locale = [NSLocale currentLocale];
+    NSString *localeId = [locale.localeIdentifier substringToIndex:2];
+    if (localeId) {
+        if ([self.translations valueForKey:localeId]) {
+            self.name = [self.translations valueForKey:localeId];
+        }
+    }
 }
 
 @end

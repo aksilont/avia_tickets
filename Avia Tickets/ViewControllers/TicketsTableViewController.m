@@ -12,6 +12,7 @@
 
 #import "CoreDataManager.h"
 #import "NotificationCenter.h"
+#import "NSString+Localize.h"
 
 @interface TicketsTableViewController ()
 
@@ -32,7 +33,7 @@
     if (self) {
         self.isFavorites = YES;
         self.tickets = @[];
-        UISegmentedControl *segments = [[UISegmentedControl alloc] initWithItems:@[@"Tickets", @"Map prices"]];
+        UISegmentedControl *segments = [[UISegmentedControl alloc] initWithItems:@[[@"tickets_header" localize], [@"map_price_header" localize]]];
         [segments addTarget:self action:@selector(changeSource:) forControlEvents:UIControlEventValueChanged];
         segments.tintColor = [UIColor blackColor];
         segments.selectedSegmentIndex = 0;
@@ -54,7 +55,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = self.isFavorites ? @"Favorites" : @"Tickets";
+    self.title = self.isFavorites ? [@"favorites_tab" localize] : [@"tickets_title" localize];
     self.navigationController.navigationBar.prefersLargeTitles = YES;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView registerClass:TicketTableViewCell.class forCellReuseIdentifier:[TicketTableViewCell identifier]];
@@ -103,14 +104,14 @@
         NSString *title;
         NSString *message;
         if (self.isFavorites) {
-            title = @"Favorite ticket reminder";
+            title = [@"ticket_reminder" localize];
             if (self.segmentedControl.selectedSegmentIndex == 0) {
                 message = [NSString stringWithFormat:@"%@ - %@ by %lld ₽", self.notificationCell.favorite.from, self.notificationCell.favorite.to, self.notificationCell.favorite.price];
             } else if (self.segmentedControl.selectedSegmentIndex == 1) {
                 message = [NSString stringWithFormat:@"%@ - %@ by %lld ₽", self.notificationCell.favoriteMapPrice.origin, self.notificationCell.favoriteMapPrice.destination, self.notificationCell.favoriteMapPrice.value];
             }
         } else {
-            title = @"Reminder of the ticket";
+            title = [@"ticket_reminder" localize];
             message = [NSString stringWithFormat:@"%@ - %@ by %@ ₽", self.notificationCell.ticket.from, self.notificationCell.ticket.to, self.notificationCell.ticket.price];
         }
         
@@ -129,9 +130,10 @@
         Notification notification = notificationMake(title, message, self.datePicker.date, imageURL);
         [[NotificationCenter sharedInstance] sendNotification:notification];
         
+        NSString *localizeNotification = [@"notification_will_be_sent" localize];
         UIAlertController *alertController = [UIAlertController
-                                              alertControllerWithTitle:@"Success"
-                                              message:[NSString stringWithFormat:@"Notification will be send at %@", self.datePicker.date]
+                                              alertControllerWithTitle:[@"success" localize]
+                                              message:[NSString stringWithFormat:@"%@ %@", localizeNotification, self.datePicker.date]
                                               preferredStyle:(UIAlertControllerStyleAlert)];
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"OK" style:(UIAlertActionStyleCancel) handler:nil];
         [alertController addAction:cancelAction];
@@ -175,14 +177,14 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    UIAlertController *sheet = [UIAlertController alertControllerWithTitle:@"Ticket action" message:@"What do you wanna do with the ticket?" preferredStyle:UIAlertControllerStyleActionSheet];
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertController *sheet = [UIAlertController alertControllerWithTitle:[@"actions_with_tickets" localize] message:[@"actions_with_tickets_describe" localize] preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:[@"close" localize] style:UIAlertActionStyleCancel handler:nil];
     
     UIAlertAction *action;
     CoreDataManager *manager = [CoreDataManager sharedInstance];
     id currentTicket = self.tickets[indexPath.row];
     if (self.isFavorites) {
-        action = [UIAlertAction actionWithTitle:@"Remove from favorites" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        action = [UIAlertAction actionWithTitle:[@"remove_from_favorite" localize] style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
             if (self.segmentedControl.selectedSegmentIndex == 0) {
                 [manager removeFavoriteTicket:(FavoriteTicket *)currentTicket];
             } else if (self.segmentedControl.selectedSegmentIndex == 1) {
@@ -193,17 +195,17 @@
     } else {
         Ticket *ticket = (Ticket *)currentTicket;
         if ([manager isFavorite:ticket]) {
-            action = [UIAlertAction actionWithTitle:@"Remove from favorites" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+            action = [UIAlertAction actionWithTitle:[@"remove_from_favorite" localize] style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
                 [manager removeFromFavorite:ticket];
             }];
         } else {
-            action = [UIAlertAction actionWithTitle:@"Add to favorites" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            action = [UIAlertAction actionWithTitle:[@"add_to_favorite" localize] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 [manager addToFavorite:ticket];
             }];
         }
     }
     
-    UIAlertAction *notification = [UIAlertAction actionWithTitle:@"Remind me" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *notification = [UIAlertAction actionWithTitle:[@"remind_me" localize] style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
         self.notificationCell = [tableView cellForRowAtIndexPath:indexPath];
         [self.dateTextField becomeFirstResponder];
     }];

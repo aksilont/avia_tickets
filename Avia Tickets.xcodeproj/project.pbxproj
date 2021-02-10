@@ -36,6 +36,9 @@
 		7AB55E3425CB3BF8006864DA /* ProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AB55E3325CB3BF8006864DA /* ProgressView.m */; };
 		7AB55E3825CB456A006864DA /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AB55E3725CB456A006864DA /* ContentViewController.m */; };
 		7AB55E3C25CB4B7D006864DA /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AB55E3B25CB4B7C006864DA /* FirstViewController.m */; };
+		7AD9CE3325D4729E009C9FBF /* NSString+Localize.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AD9CE3225D4729E009C9FBF /* NSString+Localize.m */; };
+		7AD9CE3A25D4743C009C9FBF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7AD9CE3C25D4743C009C9FBF /* Localizable.strings */; };
+		7AD9CE4725D47814009C9FBF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7AD9CE4525D47814009C9FBF /* InfoPlist.strings */; };
 		7ADD265E2598AF3B00051972 /* Airport.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ADD265D2598AF3B00051972 /* Airport.m */; };
 		7ADD26622598AF4B00051972 /* City.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ADD26612598AF4B00051972 /* City.m */; };
 		7ADD26662598AF5400051972 /* Country.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ADD26652598AF5400051972 /* Country.m */; };
@@ -96,6 +99,16 @@
 		7AB55E3725CB456A006864DA /* ContentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContentViewController.m; sourceTree = "<group>"; };
 		7AB55E3A25CB4B7C006864DA /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
 		7AB55E3B25CB4B7C006864DA /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
+		7AD9CE3125D4729E009C9FBF /* NSString+Localize.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+Localize.h"; sourceTree = "<group>"; };
+		7AD9CE3225D4729E009C9FBF /* NSString+Localize.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+Localize.m"; sourceTree = "<group>"; };
+		7AD9CE3525D473DA009C9FBF /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		7AD9CE3B25D4743C009C9FBF /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7AD9CE3E25D47441009C9FBF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7AD9CE4625D47814009C9FBF /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7AD9CE4925D47819009C9FBF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7AD9CE4A25D4781B009C9FBF /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7AD9CE4C25D484BF009C9FBF /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7AD9CE4D25D484BF009C9FBF /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7ADD265C2598AF3B00051972 /* Airport.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Airport.h; sourceTree = "<group>"; };
 		7ADD265D2598AF3B00051972 /* Airport.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Airport.m; sourceTree = "<group>"; };
 		7ADD26602598AF4B00051972 /* City.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = City.h; sourceTree = "<group>"; };
@@ -198,10 +211,12 @@
 				7ADD265B2598AC8400051972 /* Models */,
 				7ADD26682598B6F500051972 /* Managers */,
 				7A1CCC1425C0BD8000D31230 /* Database */,
-				7AA5FD9B2598AA3000C5A6A4 /* LaunchScreen.storyboard */,
-				7AA5FD9E2598AA3000C5A6A4 /* Info.plist */,
-				7AA5FD9F2598AA3000C5A6A4 /* main.m */,
 				7AA5FDB02598ABC600C5A6A4 /* Resources */,
+				7AA5FD9B2598AA3000C5A6A4 /* LaunchScreen.storyboard */,
+				7AD9CE3C25D4743C009C9FBF /* Localizable.strings */,
+				7AA5FD9E2598AA3000C5A6A4 /* Info.plist */,
+				7AD9CE4525D47814009C9FBF /* InfoPlist.strings */,
+				7AA5FD9F2598AA3000C5A6A4 /* main.m */,
 				7AA5FD992598AA3000C5A6A4 /* Assets.xcassets */,
 			);
 			path = "Avia Tickets";
@@ -287,6 +302,8 @@
 				7A1CCC2125C0BFD500D31230 /* CoreDataManager.m */,
 				7A9511AA25CD9860007851AA /* NotificationCenter.h */,
 				7A9511AB25CD9860007851AA /* NotificationCenter.m */,
+				7AD9CE3125D4729E009C9FBF /* NSString+Localize.h */,
+				7AD9CE3225D4729E009C9FBF /* NSString+Localize.m */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -331,6 +348,8 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
+				de,
 			);
 			mainGroup = 7AA5FD812598AA3000C5A6A4;
 			productRefGroup = 7AA5FD8B2598AA3000C5A6A4 /* Products */;
@@ -348,6 +367,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7AA5FDB52598AC3F00C5A6A4 /* cities.json in Resources */,
+				7AD9CE4725D47814009C9FBF /* InfoPlist.strings in Resources */,
+				7AD9CE3A25D4743C009C9FBF /* Localizable.strings in Resources */,
 				7AA5FD9D2598AA3000C5A6A4 /* LaunchScreen.storyboard in Resources */,
 				7AA5FD9A2598AA3000C5A6A4 /* Assets.xcassets in Resources */,
 				7AA5FDB62598AC3F00C5A6A4 /* countries.json in Resources */,
@@ -370,6 +391,7 @@
 				7AF26D5025BE0962004C9DF3 /* TabBarController.m in Sources */,
 				7AA5FD952598AA3000C5A6A4 /* MainViewController.m in Sources */,
 				7A3DA97E25AB709E0011DA97 /* TicketTableViewCell.m in Sources */,
+				7AD9CE3325D4729E009C9FBF /* NSString+Localize.m in Sources */,
 				7ADD265E2598AF3B00051972 /* Airport.m in Sources */,
 				7ADD26622598AF4B00051972 /* City.m in Sources */,
 				7A1CCC1E25C0BF8A00D31230 /* FavoriteTicket+CoreDataProperties.m in Sources */,
@@ -401,8 +423,30 @@
 			isa = PBXVariantGroup;
 			children = (
 				7AA5FD9C2598AA3000C5A6A4 /* Base */,
+				7AD9CE3525D473DA009C9FBF /* ru */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		7AD9CE3C25D4743C009C9FBF /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7AD9CE3B25D4743C009C9FBF /* ru */,
+				7AD9CE3E25D47441009C9FBF /* en */,
+				7AD9CE4C25D484BF009C9FBF /* de */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		7AD9CE4525D47814009C9FBF /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7AD9CE4625D47814009C9FBF /* Base */,
+				7AD9CE4925D47819009C9FBF /* en */,
+				7AD9CE4A25D4781B009C9FBF /* ru */,
+				7AD9CE4D25D484BF009C9FBF /* de */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -412,6 +456,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -471,6 +516,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

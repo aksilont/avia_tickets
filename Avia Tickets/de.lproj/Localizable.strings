@@ -1,0 +1,62 @@
+/* 
+  Localizable.strings
+  Avia Tickets
+
+  Created by Aksilont on 10.02.2021.
+  
+*/
+
+// TabBarController
+
+"search_tab" = "Suche";
+"map_tab" = "Karte Preise";
+"favorites_tab" = "Favoriten";
+
+
+// MainViewController
+
+"main_from" = "Abreise";
+"main_to" = "Ankunft";
+"main_search" = "Suche";
+
+
+// FirstViewController
+
+"about_app_header" = "Über";
+"tickets_header" = "Flugtickets";
+"map_price_header" = "Karte Preise";
+"favorites_header" = "Favoriten";
+
+"about_app_describe" = "App für Ticketsuche";
+"tickets_describe" = "Finden Sie die günstigsten Tickets";
+"map_price_describe" = "Die Preiskarte anzeigen";
+"favorites_describe" = "Speichern Sie Ihre Tickets zu Favoriten";
+
+"next_button" = "NÄCHSTEN";
+"done_button" = "BEREITEN";
+
+//PlaceViewController
+
+"cities_segment" = "Städte";
+"airports_segment" = "Flughäfen";
+
+
+// TicketsViewController
+
+"tickets_title" = "Flugtickets";
+"add_to_favorite" = "Zu Favoriten hinzufügen";
+"remove_from_favorite" = "Aus Favoriten entfernen";
+"remind_me" = "Erinnere mich";
+"ticket_reminder" = "Erinnerung an das ticket";
+"notification_will_be_sent" = "Die Benachrichtigung wird gesendet";
+"success" = "Erfolgreich";
+
+// Alerts
+
+"error" = "Fehlermeldung";
+"tickets_not_found" = "Für diese Richtung wurden keine Tickets gefunden";
+"close" = "Schließen";
+"not_set_place_arrival_or_departure" = "Sie müssen den Abfahrtsort und den Ankunftsort angeben";
+"actions_with_tickets" = "Aktionen mit dem Ticket";
+"actions_with_tickets_describe" = "Was willst du mit dem Ticket machen?";
+"not_determine_current_city" = "Die aktuelle Stadt konnte nicht ermittelt werden!";

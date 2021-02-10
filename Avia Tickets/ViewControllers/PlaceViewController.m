@@ -6,6 +6,7 @@
 //
 
 #import "PlaceViewController.h"
+#import "NSString+Localize.h"
 
 #define kReuseIdentifier @"CellIdentifier"
 
@@ -48,7 +49,7 @@
     
     self.navigationItem.searchController = searchController;
     
-    UISegmentedControl *segments = [[UISegmentedControl alloc] initWithItems:@[@"Cities", @"Airports"]];
+    UISegmentedControl *segments = [[UISegmentedControl alloc] initWithItems:@[[@"cities_segment" localize], [@"airports_segment" localize]]];
     [segments addTarget:self action:@selector(changeSource:) forControlEvents:UIControlEventValueChanged];
     segments.tintColor = [UIColor blackColor];
     segments.selectedSegmentIndex = 0;
@@ -58,10 +59,10 @@
     
     switch (self.placeType) {
         case PlaceTypeArrival:
-            self.title = @"Arrival";
+            self.title = [@"main_to" localize];
             break;
         case PlaceTypeDeparture:
-            self.title = @"Departure";
+            self.title = [@"main_from" localize];
             break;
     }
 }
