@@ -1,0 +1,62 @@
+/* 
+  Localizable.strings
+  Avia Tickets
+
+  Created by Aksilont on 10.02.2021.
+  
+*/
+
+// TabBarController
+
+"search_tab" = "Search";
+"map_tab" = "Map prices";
+"favorites_tab" = "Favorites";
+
+
+// MainViewController
+
+"main_from" = "Departure";
+"main_to" = "Arrival";
+"main_search" = "Search";
+
+
+// FirstViewController
+
+"about_app_header" = "About";
+"tickets_header" = "Avia Tickets";
+"map_price_header" = "Map price";
+"favorites_header" = "Favorites";
+
+"about_app_describe" = "App for ticket search";
+"tickets_describe" = "Find the cheapest tickets";
+"map_price_describe" = "View the price map";
+"favorites_describe" = "Save your tickets to favorites";
+
+"next_button" = "NEXT";
+"done_button" = "READY";
+
+//PlaceViewController
+
+"cities_segment" = "Cities";
+"airports_segment" = "Airports";
+
+
+// TicketsViewController
+
+"tickets_title" = "Tickets";
+"add_to_favorite" = "Add to favorites";
+"remove_from_favorite" = "Remove from favorites";
+"remind_me" = "Remind me";
+"ticket_reminder" = "Reminder of the ticket";
+"notification_will_be_sent" = "The notification will be sent";
+"success" = "Successful";
+
+// Alerts
+
+"error" = "Error";
+"tickets_not_found" = "No tickets were found for this direction";
+"close" = "Close";
+"not_set_place_arrival_or_departure" = "You must specify the place of departure and the place of arrival";
+"actions_with_tickets" = "Actions with the ticket";
+"actions_with_tickets_describe" = "What do you wanna do with the ticket?";
+"not_determine_current_city" = "The current city could not be determined!";
